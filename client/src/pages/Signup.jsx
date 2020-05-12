@@ -33,7 +33,7 @@ const Signup = () => {
           console.log(error);
         });
     } else {
-      console.log("Invalid Data");
+      console.log("Error");
     }
   };
 
