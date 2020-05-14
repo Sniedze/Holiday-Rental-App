@@ -12,7 +12,7 @@ const Search = () => {
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [guests, setGuests] = useState(1);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log(city, country, arrivalDate, checkOutDate, guests);
   };
@@ -23,14 +23,14 @@ const Search = () => {
         type="text"
         placeholder="City"
         value={city}
-        onChange={event => setCity(event.target.value)}
+        onChange={(event) => setCity(event.target.value)}
       ></input>
       ;<br></br>
       <input
         type="text"
         placeholder="Country"
         value={country}
-        onChange={event => setCountry(event.target.value)}
+        onChange={(event) => setCountry(event.target.value)}
       ></input>
       <br />
       <MuiPickersUtilsProvider utils={(DateFnsUtils, MomentUtils, LuxonUtils)}>
@@ -43,7 +43,7 @@ const Search = () => {
         type="number"
         min="1"
         value={guests}
-        onChange={event => setGuests(event.target.value)}
+        onChange={(event) => setGuests(event.target.value)}
       ></input>
       <br />
       <button>Search</button>
