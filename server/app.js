@@ -1,14 +1,45 @@
 const express = require("express");
 const app = express();
-
-// Initialize express-session
-const session = require("express-session");
+//CORS
+const cors = require("cors");
 
 app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+// Initialize express-session
+const session = require("express-session");
+// Store sessions in MySQL database using Knex (sessions MUST be stored outside of cache)
+const KnexSessionStore = require("connect-session-knex")(session);
+// Secret key for session
+const key = require("./config/key");
+// parse application/json
+app.use(express.json());
+/* Setup the database */
+
+const { Model } = require("objection");
+const Knex = require("knex");
+const knexFile = require("./knexfile.js");
+
+const knex = Knex(knexFile.development);
+
+// Give the knex instance to objection.
+Model.knex(knex);
+//initializes KnexSessionStore
+const store = new KnexSessionStore({ knex });
+
+// Implements express-session
+app.use(
   session({
-    secret: `this is a secret and shouldn't be shared in version control etc.`,
+    secret: key.secret,
+    name: "user_sid",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      expires: 600000,
+    },
+    store: store,
   })
 );
 
