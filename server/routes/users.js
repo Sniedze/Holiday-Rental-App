@@ -36,7 +36,12 @@ router.post("/users/login", async (req, res) => {
       if (!isSame) {
         return res.status(404).send({ response: "check the credentials" });
       } else {
-        return res.status(200).send({ response: "Logged-in, welcome" });
+        req.session.user = { email: user.email, id: user.id };
+
+        return res
+          .status(200)
+          .send({ response: "Logged-in, welcome" })
+          .end(req.session.cookie);
       }
     });
   } else {
