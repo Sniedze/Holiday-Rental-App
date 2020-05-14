@@ -22,13 +22,9 @@ const Login = () => {
           password,
         })
         .then(function (res) {
-          console.log(res);
           if (res.status === 200) {
-            return res.json().then(({ token }) => {
-              localStorage.setItem("token", `bearer ${token}`);
-              console.log("this is ulrikas token: " + token);
-              return token;
-            });
+            console.log(res);
+            //localStorage.setItem("token", `bearer ${token}`);
           }
         })
         .then(() => {
@@ -48,11 +44,13 @@ const Login = () => {
         <input
           type="email"
           required
+          defaultValue="1@1.com"
           onChange={(event) => setEmail(event.target.value)}
         ></input>
         <input
           type="password"
           required
+          defaultValue="password"
           onChange={(event) => setPassword(event.target.value)}
         ></input>
         <button onClick={handleClick}>LOGIN</button>

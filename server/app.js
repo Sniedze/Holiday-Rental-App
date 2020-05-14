@@ -5,7 +5,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://127.0.0.1:3000",
   })
 );
 // Initialize express-session
@@ -37,6 +37,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
+      secure: true,
       expires: 600000,
     },
     store: store,
