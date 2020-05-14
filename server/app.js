@@ -4,6 +4,20 @@ const app = express();
 // Initialize express-session
 const session = require("express-session");
 
+// parse application/json
+app.use(express.json());
+
+/* Setup the database */
+
+const { Model } = require("objection");
+const Knex = require("knex");
+const knexFile = require("./knexfile.js");
+
+const knex = Knex(knexFile.development);
+
+// Give the knex instance to objection.
+Model.knex(knex);
+
 app.use(
   session({
     secret: `this is a secret and shouldn't be shared in version control etc.`,
