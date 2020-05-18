@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { isAuthenticated } from "../functions/auth";
 
 const Login = () => {
-  useEffect(() => {
-    if (isAuthenticated()) history.replace("/profile");
-  });
-
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // "" = empty string
@@ -24,11 +19,7 @@ const Login = () => {
         .then(function(res) {
           console.log(res);
           if (res.status === 200) {
-            return res.json().then(({ token }) => {
-              localStorage.setItem("token", `bearer ${token}`);
-              console.log("this is ulrikas token: " + token);
-              return token;
-            });
+            console.log(res);
           }
         })
         .then(() => {

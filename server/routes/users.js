@@ -17,13 +17,41 @@ PATCH /users/[userId] -- change only some parts of the user
 //#############################################
 //GET HERE
 
+router.get("/users/authenticated", async (req, res, next) => {
+  try {
+    if (req.session.user.id) {
+      res.status(200).send({ message: "authenticated" });
+    }
+    throw res.status(403).send({ message: "denied" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/users/logout", async (req, res, next) => {
+  try {
+    req.session.destroy(error => {
+      if (error) {
+        throw res.status(500).send({ message: "unable to logout" });
+      }
+      res.status(200).send({ message: "Logged out" });
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 //#############################################
 // LOGIN
 
 router.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password);
   if (email && password) {
-    const users = await User.query().select().where({ email: email }).limit(1); //database query for user with the email specified, limit(1) stops the search after first match
+    const users = await User.query()
+      .select()
+      .where({ email: email })
+      .limit(1); //database query for user with the email specified, limit(1) stops the search after first match
     const user = users[0];
 
     if (!user) {
@@ -38,10 +66,7 @@ router.post("/users/login", async (req, res) => {
       } else {
         req.session.user = { email: user.email, id: user.id };
 
-        return res
-          .status(200)
-          .send({ response: "Logged-in, welcome" })
-          .end(req.session.cookie);
+        return res.status(200).send({ response: "Logged-in, welcome" });
       }
     });
   } else {
@@ -76,7 +101,7 @@ router.post("/users/register", (req, res) => {
               first_name: firstName,
               last_name: lastName,
               email,
-              password: hashedPassword,
+              password: hashedPassword
             });
             return res
               .status(200)
