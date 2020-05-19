@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -6,8 +6,14 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import PrivateRoute from "./components/PrivateRoute";
+import { authenticate } from "./functions/auth";
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    authenticate(setIsAuth); // calling the function and changing the state
+  }, []); // [ ] = list of dependencies
   return (
     <Router>
       <div className="App">
@@ -16,7 +22,10 @@ function App() {
           <Route exact path="/" component={props => <Home />}></Route>
           <Route path="/signup" component={props => <Signup />}></Route>
           <Route path="/login" component={props => <Login />}></Route>
-          <Route path="/profile" component={props => <Profile />}></Route>
+          <PrivateRoute
+            path="/profile"
+            component={props => <Profile />}
+          ></PrivateRoute>
         </Switch>
         <Footer />
       </div>
