@@ -6,7 +6,7 @@ const cors = require("cors");
 app.use(
   cors({
     origin: "http://localhost:3000",
-    credentials: true
+    credentials: true,
   })
 );
 // Initialize express-session
@@ -38,9 +38,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 600000
+      expires: 600000,
     },
-    store: store
+    store: store,
   })
 );
 
@@ -51,7 +51,7 @@ app.use(usersRoute);
 /* Start the server, KEEP AT THE BOTTOM  */
 const port = process.env.PORT || 9090;
 
-const server = app.listen(port, error => {
+const server = app.listen(port, (error) => {
   if (error) {
     console.log("Error running Express");
   }
