@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setIsAuth }) => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // "" = empty string
@@ -17,9 +17,8 @@ const Login = () => {
           password
         })
         .then(function(res) {
-          console.log(res);
           if (res.status === 200) {
-            console.log(res);
+            setIsAuth(true);
           }
         })
         .then(() => {

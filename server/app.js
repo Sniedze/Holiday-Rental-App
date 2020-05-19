@@ -34,7 +34,6 @@ const store = new KnexSessionStore({ knex });
 app.use(
   session({
     secret: key.secret,
-    name: "user_sid",
     resave: false,
     saveUninitialized: false,
     cookie: {

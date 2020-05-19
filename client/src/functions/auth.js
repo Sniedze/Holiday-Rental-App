@@ -6,7 +6,6 @@ export const authenticate = setIsAuth => {
     url: "http://localhost:9090/users/authenticated",
     withCredentials: true,
     headers: {
-      // passing json
       Accept: "application/json",
       "Content-Type": "application/json"
     }
@@ -18,6 +17,5 @@ export const authenticate = setIsAuth => {
     })
     .catch(error => {
       setIsAuth(false);
-      console.log("Could not login");
     });
 };

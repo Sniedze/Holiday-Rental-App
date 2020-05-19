@@ -18,17 +18,19 @@ PATCH /users/[userId] -- change only some parts of the user
 //GET HERE
 
 router.get("/users/authenticated", async (req, res, next) => {
+  console.log(req.session.user);
   try {
-    if (req.session.user.id) {
-      res.status(200).send({ message: "authenticated" });
+    if (!req.session.user) {
+      throw res.status(403).send({ message: "denied" });
     }
-    throw res.status(403).send({ message: "denied" });
+    res.status(200).send({ message: "authenticated" });
   } catch (error) {
-    next(error);
+    next();
+    ///console.log(error);
   }
 });
 
-router.get("/users/logout", async (req, res, next) => {
+router.get("/users/logout", async (req, res) => {
   try {
     req.session.destroy(error => {
       if (error) {
@@ -36,9 +38,7 @@ router.get("/users/logout", async (req, res, next) => {
       }
       res.status(200).send({ message: "Logged out" });
     });
-  } catch (error) {
-    next(error);
-  }
+  } catch (error) {}
 });
 
 //#############################################
@@ -46,7 +46,7 @@ router.get("/users/logout", async (req, res, next) => {
 
 router.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
+
   if (email && password) {
     const users = await User.query()
       .select()
@@ -66,7 +66,7 @@ router.post("/users/login", async (req, res) => {
       } else {
         req.session.user = { email: user.email, id: user.id };
 
-        return res.status(200).send({ response: "Logged-in, welcome" });
+        return res.status(200).send({ response: req.session.user });
       }
     });
   } else {
