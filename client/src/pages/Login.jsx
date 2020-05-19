@@ -13,15 +13,15 @@ const Login = () => {
   const [password, setPassword] = useState(""); // "" = empty string
   const [error, setError] = useState("");
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     event.preventDefault();
     if ((email, password)) {
       axios
         .post("http://localhost:9090/users/login", {
           email,
-          password,
+          password
         })
-        .then(function (res) {
+        .then(function(res) {
           console.log(res);
           if (res.status === 200) {
             return res.json().then(({ token }) => {
@@ -34,7 +34,7 @@ const Login = () => {
         .then(() => {
           history.replace("/profile");
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     } else {
@@ -48,12 +48,12 @@ const Login = () => {
         <input
           type="email"
           required
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={event => setEmail(event.target.value)}
         ></input>
         <input
           type="password"
           required
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={event => setPassword(event.target.value)}
         ></input>
         <button onClick={handleClick}>LOGIN</button>
       </form>
