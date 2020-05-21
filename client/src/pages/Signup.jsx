@@ -18,11 +18,12 @@ const Signup = () => {
     //console.log(firstName, lastName, email);
 
     if (
-      (firstName,
-      lastName,
-      email,
-      password,
-      repeatPassword && password === repeatPassword)
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      repeatPassword &&
+      password === repeatPassword
     ) {
       axios
         .post("http://localhost:9090/users/register", {
@@ -32,12 +33,13 @@ const Signup = () => {
           password,
         })
         .then(function (response) {
-          console.log(response);
           setSignUp(true); // changing hook state
           history.push("/login");
         })
         .catch(function (error) {
-          console.log(error);
+          if (error.response.status === 400) {
+            setError("User with this email already exists");
+          } else setError("Server error");
         });
     } else {
       setError("Invalid Data");
