@@ -11,19 +11,24 @@ import { authenticate } from "./functions/auth";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  console.log(isAuth);
   useEffect(() => {
     authenticate(setIsAuth); // calling the function and changing the state
   }, []); // [ ] = list of dependencies
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header isAuth={isAuth} setIsAuth={setIsAuth} />
         <Switch>
           <Route exact path="/" component={props => <Home />}></Route>
           <Route path="/signup" component={props => <Signup />}></Route>
-          <Route path="/login" component={props => <Login />}></Route>
+          <Route
+            path="/login"
+            component={props => <Login setIsAuth={setIsAuth} />}
+          ></Route>
           <PrivateRoute
             path="/profile"
+            isAuth={isAuth}
             component={props => <Profile />}
           ></PrivateRoute>
         </Switch>

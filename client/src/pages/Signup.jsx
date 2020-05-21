@@ -25,20 +25,11 @@ const Signup = () => {
       repeatPassword && password === repeatPassword)
     ) {
       axios
-<<<<<<< HEAD
-        .post(`http://localhost:9090/users/register`, {
-          firstName,
-          lastName,
-          email,
-          password,
-          repeatPassword,
-=======
         .post("http://localhost:9090/users/register", {
           firstName,
           lastName,
           email,
-          password
->>>>>>> 07d45b98f248b022679c4491b81481fc2f50b0b5
+          password,
         })
         .then(function (response) {
           console.log(response);

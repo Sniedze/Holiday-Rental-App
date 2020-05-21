@@ -18,27 +18,30 @@ PATCH /users/[userId] -- change only some parts of the user
 //GET HERE
 
 router.get("/users/authenticated", async (req, res, next) => {
+  console.log(req.session.user);
   try {
-    if (req.session.user.id) {
-      res.status(200).send({ message: "authenticated" });
+    if (!req.session.user) {
+      throw res.status(403).send({ message: "denied" });
     }
-    throw res.status(403).send({ message: "denied" });
+    res.status(200).send({ message: "authenticated" });
   } catch (error) {
-    next(error);
+    next();
+    ///console.log(error);
   }
 });
 
-router.get("/users/logout", async (req, res, next) => {
+router.get("/users/logout", async (req, res) => {
   try {
-    req.session.destroy(error => {
+    req.session.destroy((error) => {
       if (error) {
         throw res.status(500).send({ message: "unable to logout" });
       }
-      res.status(200).send({ message: "Logged out" });
+      res
+        .status(200)
+        .clearCookie("connect.sid")
+        .send({ message: "Logged out" });
     });
-  } catch (error) {
-    next(error);
-  }
+  } catch (error) {}
 });
 
 //#############################################
@@ -46,12 +49,9 @@ router.get("/users/logout", async (req, res, next) => {
 
 router.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
+
   if (email && password) {
-    const users = await User.query()
-      .select()
-      .where({ email: email })
-      .limit(1); //database query for user with the email specified, limit(1) stops the search after first match
+    const users = await User.query().select().where({ email: email }).limit(1); //database query for user with the email specified, limit(1) stops the search after first match
     const user = users[0];
 
     if (!user) {
@@ -65,8 +65,7 @@ router.post("/users/login", async (req, res) => {
         return res.status(404).send({ response: "check the credentials" });
       } else {
         req.session.user = { email: user.email, id: user.id };
-
-        return res.status(200).send({ response: "Logged-in, welcome" });
+        return res.status(200).send({ response: "Logged-in" });
       }
     });
   } else {
@@ -101,7 +100,7 @@ router.post("/users/register", (req, res) => {
               first_name: firstName,
               last_name: lastName,
               email,
-              password: hashedPassword
+              password: hashedPassword,
             });
             return res
               .status(200)

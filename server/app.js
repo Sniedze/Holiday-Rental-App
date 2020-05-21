@@ -2,19 +2,21 @@ const express = require("express");
 const app = express();
 //CORS
 const cors = require("cors");
-
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
 // Initialize express-session
 const session = require("express-session");
 // Store sessions in MySQL database using Knex (sessions MUST be stored outside of cache)
 const KnexSessionStore = require("connect-session-knex")(session);
 // Secret key for session
 const key = require("./config/key");
+
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
+
+app.use(express.urlencoded({ extended: false }));
 // parse application/json
 app.use(express.json());
 /* Setup the database */
@@ -34,7 +36,6 @@ const store = new KnexSessionStore({ knex });
 app.use(
   session({
     secret: key.secret,
-    name: "user_sid",
     resave: false,
     saveUninitialized: false,
     cookie: {
