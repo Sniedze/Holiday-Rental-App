@@ -12,6 +12,7 @@ exports.up = function (knex) {
       table.string("postal_code").notNullable();
       table.string("city").notNullable();
       table.string("country").notNullable();
+      table.index(["city", "country"]);
     })
     .createTable("images", (table) => {
       table.increments("id").notNullable();
@@ -25,9 +26,9 @@ exports.up = function (knex) {
       table.enum("type", ["house", "apartment", "room"]).notNullable();
       table.string("description").notNullable();
       table.integer("bedrooms").notNullable();
+      table.integer("guest_capacity").notNullable();
       table.integer("bathrooms").notNullable();
       table.integer("size").notNullable();
-      table.boolean("is_available").defaultTo(true);
       table.float("price").notNullable();
       table.integer("location_id").unsigned().notNullable();
       table
@@ -43,6 +44,7 @@ exports.up = function (knex) {
         .inTable("images")
         .onDelete("cascade")
         .onUpdate("cascade");
+      table.index(["guest_capacity", "type"]);
     })
     .createTable("user_properties", (table) => {
       table.integer("property_id").unsigned().notNullable();
@@ -61,6 +63,7 @@ exports.up = function (knex) {
         .onUpdate("cascade");
     })
     .createTable("rents", (table) => {
+      table.increments("id").notNullable();
       table.integer("property_id").unsigned().notNullable();
       table
         .foreign("property_id")
@@ -70,6 +73,7 @@ exports.up = function (knex) {
         .onUpdate("cascade");
       table.date("check_in").notNullable();
       table.date("check_out").notNullable();
+      table.index(["check_in", "check_out"]);
     });
 };
 

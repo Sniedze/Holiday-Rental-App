@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const usersRoute = require("./routes/users.js");
+const propertiesRoute = require("./routes/properties.js");
+
 //CORS
 const cors = require("cors");
 // Initialize express-session
@@ -46,8 +49,8 @@ app.use(
 );
 
 // Users routes
-const usersRoute = require("./routes/users.js");
 app.use(usersRoute);
+app.use(propertiesRoute);
 
 /* Start the server, KEEP AT THE BOTTOM  */
 const port = process.env.PORT || 9090;

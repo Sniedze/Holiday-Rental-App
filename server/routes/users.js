@@ -1,8 +1,6 @@
 const router = require("express").Router();
-
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
 const User = require("../models/User");
 
 //#############################################
@@ -18,7 +16,6 @@ PATCH /users/[userId] -- change only some parts of the user
 //GET HERE
 
 router.get("/users/authenticated", async (req, res, next) => {
-  console.log(req.session.user);
   try {
     if (!req.session.user) {
       throw res.status(403).send({ message: "denied" });
