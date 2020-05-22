@@ -18,7 +18,7 @@ const AddProperty = () => {
   const [guestCapacity, setGuestCapacity] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleClick = (ev) => {
+  const handleClick = ev => {
     ev.preventDefault();
     if (
       title &&
@@ -50,7 +50,7 @@ const AddProperty = () => {
         size,
         price,
         mainImage,
-        images,
+        images
       };
       console.log(data);
       axios({
@@ -59,10 +59,10 @@ const AddProperty = () => {
         withCredentials: true,
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        data: data,
-      }).then((res) => {
+        data: data
+      }).then(res => {
         if (res.status === 200) {
           setMessage(`New property ${title} created.`);
         } else setMessage("Failed to add property.");
@@ -78,14 +78,14 @@ const AddProperty = () => {
         <input
           type="text"
           id="propertyTitleInput"
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={event => setTitle(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyTypeInput">Type</label>
         <select
           type="text"
           id="propertyTypeInput"
-          onChange={(event) => setType(event.target.value)}
+          onChange={event => setType(event.target.value)}
         >
           <option value="apartment">Apartment</option>
           <option value="house">House</option>
@@ -96,70 +96,70 @@ const AddProperty = () => {
         <input
           type="text"
           id="propertyStreet"
-          onChange={(event) => setStreet(event.target.value)}
+          onChange={event => setStreet(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyPostalCode">Postal Code</label>
         <input
           type="text"
           id="propertyPostalCode"
-          onChange={(event) => setPostalCode(event.target.value)}
+          onChange={event => setPostalCode(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyCity">City</label>
         <input
           type="text"
           id="propertyCity"
-          onChange={(event) => setCity(event.target.value)}
+          onChange={event => setCity(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyCountry">Country</label>
         <input
           type="text"
           id="propertyCountry"
-          onChange={(event) => setCountry(event.target.value)}
+          onChange={event => setCountry(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyBedrooms">Bedrooms</label>
         <input
           type="number"
           id="propertyBedrooms"
-          onChange={(event) => setBedrooms(event.target.value)}
+          onChange={event => setBedrooms(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyGuests">Guests #</label>
         <input
           type="number"
           id="propertyGuests"
-          onChange={(event) => setGuestCapacity(event.target.value)}
+          onChange={event => setGuestCapacity(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyBathrooms">Bathrooms</label>
         <input
           type="number"
           id="propertyBathrooms"
-          onChange={(event) => setBathrooms(event.target.value)}
+          onChange={event => setBathrooms(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertySqm">Size</label>
         <input
           type="number"
           id="propertySqm"
-          onChange={(event) => setSize(event.target.value)}
+          onChange={event => setSize(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyPriceInput">Price</label>
         <input
           type="number"
           id="propertyPriceInput"
-          onChange={(event) => setPrice(event.target.value)}
+          onChange={event => setPrice(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="propertyDescription">Description</label>
         <textarea
           maxLength="250"
           id="propertyDescription"
-          onChange={(event) => setDescription(event.target.value)}
+          onChange={event => setDescription(event.target.value)}
         ></textarea>
         <br></br>
         <label htmlFor="mainImageInput">Main Image</label>
@@ -168,7 +168,7 @@ const AddProperty = () => {
           type="file"
           alt="my property"
           accept="image/png, image/jpg, image/jpeg"
-          onChange={(event) => setMainImage(event.target.value)}
+          onChange={event => setMainImage(event.target.value)}
         ></input>
         <br></br>
         <label htmlFor="imagesInput">Images</label>
@@ -178,7 +178,7 @@ const AddProperty = () => {
           alt="my properties"
           accept="image/png, image/jpg, image/jpeg"
           multiple
-          onChange={(event) => setImages(event.target.value)}
+          onChange={event => setImages(event.target.value)}
         ></input>
         <br></br>
         <button onClick={handleClick}>Add Property</button>
