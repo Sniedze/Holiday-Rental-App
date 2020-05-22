@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import { authenticate } from "./functions/auth";
+import AddProperty from "./pages/AddProperty";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -20,16 +21,21 @@ function App() {
       <div className="App">
         <Header isAuth={isAuth} setIsAuth={setIsAuth} />
         <Switch>
-          <Route exact path="/" component={props => <Home />}></Route>
-          <Route path="/signup" component={props => <Signup />}></Route>
+          <Route exact path="/" component={(props) => <Home />}></Route>
+          <Route path="/signup" component={(props) => <Signup />}></Route>
           <Route
             path="/login"
-            component={props => <Login setIsAuth={setIsAuth} />}
+            component={(props) => <Login setIsAuth={setIsAuth} />}
           ></Route>
           <PrivateRoute
             path="/profile"
             isAuth={isAuth}
-            component={props => <Profile />}
+            component={(props) => <Profile />}
+          ></PrivateRoute>
+          <PrivateRoute
+            path="/property/create"
+            isAuth={isAuth}
+            component={(props) => <AddProperty />}
           ></PrivateRoute>
         </Switch>
         <Footer />

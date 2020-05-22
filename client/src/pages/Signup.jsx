@@ -18,11 +18,12 @@ const Signup = () => {
     //console.log(firstName, lastName, email);
 
     if (
-      (firstName,
-      lastName,
-      email,
-      password,
-      repeatPassword && password === repeatPassword)
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      repeatPassword &&
+      password === repeatPassword
     ) {
       axios
         .post("http://localhost:9090/users/register", {

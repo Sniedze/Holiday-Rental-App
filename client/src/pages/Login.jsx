@@ -10,7 +10,7 @@ const Login = ({ setIsAuth }) => {
 
   const handleClick = (event) => {
     event.preventDefault();
-    if ((email, password)) {
+    if (email && password) {
       axios({
         method: "post",
         url: "http://localhost:9090/users/login",
