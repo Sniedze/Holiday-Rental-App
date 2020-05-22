@@ -1,4 +1,20 @@
 const router = require("express").Router();
+const app = require("express")();
+const multer = require("multer");
+const mime = require("mime");
+const imageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + "/../files/images");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + "." + mime.getExtension(file.mimetype)
+    );
+  },
+});
+const upload = multer({ storage: imageStorage });
+
 const isAuthenticated = require("../helpers/auth_backend");
 const User = require("../models/User");
 const Property = require("../models/Property");
@@ -17,25 +33,26 @@ router.get("/user/properties", async (req, res) => {
   }
 });
 
-router.post("/properties/create", async (req, res, next) => {
-  const {
-    title,
-    type,
-    street,
-    postalCode,
-    city,
-    country,
-    bedrooms,
-    bathrooms,
-    size,
-    price,
-    description,
-    mainImage,
-    images,
-    guestCapacity,
-  } = req.body;
-
-  res.send(req.body);
+router.post("/properties/create", upload.any(), (req, res, next) => {
+  console.log(__dirname);
+  /*     const {
+      title,
+      type,
+      street,
+      postalCode,
+      city,
+      country,
+      bedrooms,
+      bathrooms,
+      size,
+      price,
+      description,
+      mainImage,
+      images,
+      guestCapacity,
+    } = req.body; */
+  //res.send(req.body);
+  console.log(req.files);
 });
 
 module.exports = router;

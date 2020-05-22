@@ -2,6 +2,7 @@ import React, { useState } from "react";
 const axios = require("axios");
 
 const AddProperty = () => {
+  const multipleImages = [];
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [street, setStreet] = useState("");
@@ -13,15 +14,26 @@ const AddProperty = () => {
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState([]);
-  const [mainImage, setMainImage] = useState("");
+  const [images, setImages] = useState(null);
+  const [mainImage, setMainImage] = useState(null);
   const [guestCapacity, setGuestCapacity] = useState("");
   const [message, setMessage] = useState("");
+<<<<<<< HEAD
 
   const handleClick = ev => {
+=======
+  /*   const handleImagesUpload = async (files) => {
+    for (let i = 0; i < files.length; i++) {
+      multipleImages.push(files[i]);
+    }
+    setImages(multipleImages);
+  }; */
+  const handleClick = (ev) => {
+>>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
     ev.preventDefault();
     if (
-      title &&
+      true
+      /*             title &&
       street &&
       type &&
       postalCode &&
@@ -34,7 +46,7 @@ const AddProperty = () => {
       size &&
       price &&
       mainImage &&
-      images
+      images */
     ) {
       const data = {
         title,
@@ -49,20 +61,34 @@ const AddProperty = () => {
         guestCapacity,
         size,
         price,
+<<<<<<< HEAD
         mainImage,
         images
+=======
+        /*         mainImage,
+        images, */
+>>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
       };
-      console.log(data);
+
+      const formData = new FormData();
+      formData.append("mainImage", mainImage);
+      console.log(formData);
       axios({
         method: "POST",
         url: "http://localhost:9090/properties/create",
         withCredentials: true,
+<<<<<<< HEAD
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
         data: data
       }).then(res => {
+=======
+        data: formData,
+      }).then((res) => {
+        console.log(res);
+>>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
         if (res.status === 200) {
           setMessage(`New property ${title} created.`);
         } else setMessage("Failed to add property.");
@@ -73,7 +99,7 @@ const AddProperty = () => {
   return (
     <>
       <h1>Add Property</h1>
-      <form>
+      <form encType="multipart/form-data">
         <label htmlFor="propertyTitleInput">Title</label>
         <input
           type="text"
@@ -168,7 +194,13 @@ const AddProperty = () => {
           type="file"
           alt="my property"
           accept="image/png, image/jpg, image/jpeg"
+<<<<<<< HEAD
           onChange={event => setMainImage(event.target.value)}
+=======
+          onChange={(event) => {
+            setMainImage(event.target.files[0]);
+          }}
+>>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
         ></input>
         <br></br>
         <label htmlFor="imagesInput">Images</label>
@@ -178,7 +210,13 @@ const AddProperty = () => {
           alt="my properties"
           accept="image/png, image/jpg, image/jpeg"
           multiple
+<<<<<<< HEAD
           onChange={event => setImages(event.target.value)}
+=======
+          onChange={(event) => {
+            //handleImagesUpload(event.target.files);
+          }}
+>>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
         ></input>
         <br></br>
         <button onClick={handleClick}>Add Property</button>

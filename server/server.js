@@ -19,11 +19,11 @@ app.use(
   })
 );
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 // parse application/json
 app.use(express.json());
-/* Setup the database */
 
+/* Setup the database */
 const { Model } = require("objection");
 const Knex = require("knex");
 const knexFile = require("./knexfile.js");
@@ -42,7 +42,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 600000,
+      expires: 6000000,
     },
     store: store,
   })

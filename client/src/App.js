@@ -12,7 +12,6 @@ import AddProperty from "./pages/AddProperty";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
-  console.log(isAuth);
   useEffect(() => {
     authenticate(setIsAuth); // calling the function and changing the state
   }, []); // [ ] = list of dependencies
