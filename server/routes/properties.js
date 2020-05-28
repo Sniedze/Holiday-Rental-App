@@ -1,7 +1,12 @@
 const router = require("express").Router();
-const app = require("express")();
+const app = require("express");
 const multer = require("multer");
 const mime = require("mime");
+const isAuthenticated = require("../helpers/auth_backend");
+const User = require("../models/User");
+const Property = require("../models/Property");
+const Location = require("../models/Location");
+
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "/../files/images");
@@ -13,12 +18,7 @@ const imageStorage = multer.diskStorage({
     );
   },
 });
-const upload = multer({ storage: imageStorage });
-
-const isAuthenticated = require("../helpers/auth_backend");
-const User = require("../models/User");
-const Property = require("../models/Property");
-const Location = require("../models/Location");
+const uploadImages = multer({ storage: imageStorage });
 
 router.get("/user/properties", async (req, res) => {
   const { id } = req.session.user;
@@ -33,26 +33,35 @@ router.get("/user/properties", async (req, res) => {
   }
 });
 
-router.post("/properties/create", upload.any(), (req, res, next) => {
-  console.log(__dirname);
-  /*     const {
+router.post(
+  "/properties/create",
+  uploadImages.fields([{ name: "mainImage", maxCount: 1 }]),
+  (req, res, next) => {
+    console.log(req.session);
+    if (req.session.user) {
+      console.log("Is auth");
+    } else {
+      console.log("not auth");
+    }
+    const jsonData = JSON.stringify(req.body);
+    console.log(jsonData);
+
+    const {
       title,
-      type,
-      street,
-      postalCode,
-      city,
-      country,
-      bedrooms,
-      bathrooms,
-      size,
-      price,
-      description,
-      mainImage,
-      images,
-      guestCapacity,
-    } = req.body; */
-  //res.send(req.body);
-  console.log(req.files);
-});
+      // type,
+      // street,
+      // postalCode,
+      // city,
+      // country,
+      // bedrooms,
+      // bathrooms,
+      // size,
+      // price,
+      // description,
+      // guestCapacity,
+    } = jsonData;
+    res.send(req.body);
+  }
+);
 
 module.exports = router;

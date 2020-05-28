@@ -43,31 +43,32 @@ const AddProperty = () => {
       mainImage &&
       images */
     ) {
-      const data = {
-        title,
-        street,
-        type,
-        postalCode,
-        city,
-        country,
-        description,
-        bedrooms,
-        bathrooms,
-        guestCapacity,
-        size,
-        price,
-        /*         mainImage,
-        images, */
-      };
-
       const formData = new FormData();
       formData.append("mainImage", mainImage);
+      formData.append("title", title);
+      formData.append("street", street);
+      formData.append("type", type);
+      formData.append("postalCode", postalCode);
+      formData.append("city", city);
+      formData.append("country", country);
+      formData.append("description", description);
+      formData.append("bedrooms", bedrooms);
+      formData.append("bathrooms", bathrooms);
+      formData.append("guestCapacity", guestCapacity);
+      formData.append("size", size);
+      formData.append("price", price);
+      //formData.append("images", images);
+
       console.log(formData);
       axios({
         method: "POST",
         url: "http://localhost:9090/properties/create",
         withCredentials: true,
         data: formData,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
       }).then((res) => {
         console.log(res);
         if (res.status === 200) {
