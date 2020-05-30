@@ -67,9 +67,15 @@ const AddProperty = () => {
         data: formData,
         headers: {
           Accept: "application/json",
+<<<<<<< HEAD
           "Content-Type": "multipart/form-data"
         }
       }).then(res => {
+=======
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((res) => {
+>>>>>>> fa5e70eaa89d087a40af390de62cae679d82eb88
         console.log(res);
         if (res.status === 200) {
           setMessage(`New property ${title} created.`);

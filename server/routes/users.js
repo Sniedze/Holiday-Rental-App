@@ -19,8 +19,7 @@ router.get("/users/authenticated", async (req, res, next) => {
   try {
     if (!req.session.user) {
       throw res.status(403).send({ message: "denied" });
-    }
-    res.status(200).send({ message: "authenticated" });
+    } else res.status(200).send({ message: "authenticated" });
   } catch (error) {
     next();
     ///console.log(error);
