@@ -29,7 +29,7 @@ router.get("/users/authenticated", async (req, res, next) => {
 
 router.get("/users/logout", async (req, res) => {
   try {
-    req.session.destroy((error) => {
+    req.session.destroy(error => {
       if (error) {
         throw res.status(500).send({ message: "unable to logout" });
       }
@@ -48,7 +48,10 @@ router.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (email && password) {
-    const users = await User.query().select().where({ email: email }).limit(1); //database query for user with the email specified, limit(1) stops the search after first match
+    const users = await User.query()
+      .select()
+      .where({ email: email })
+      .limit(1); //database query for user with the email specified, limit(1) stops the search after first match
     const user = users[0];
 
     if (!user) {
@@ -97,7 +100,7 @@ router.post("/users/register", (req, res) => {
               first_name: firstName,
               last_name: lastName,
               email,
-              password: hashedPassword,
+              password: hashedPassword
             });
             return res
               .status(200)

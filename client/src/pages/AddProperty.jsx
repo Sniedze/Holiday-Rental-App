@@ -18,18 +18,13 @@ const AddProperty = () => {
   const [mainImage, setMainImage] = useState(null);
   const [guestCapacity, setGuestCapacity] = useState("");
   const [message, setMessage] = useState("");
-<<<<<<< HEAD
-
-  const handleClick = ev => {
-=======
   /*   const handleImagesUpload = async (files) => {
     for (let i = 0; i < files.length; i++) {
       multipleImages.push(files[i]);
     }
     setImages(multipleImages);
   }; */
-  const handleClick = (ev) => {
->>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
+  const handleClick = ev => {
     ev.preventDefault();
     if (
       true
@@ -48,47 +43,34 @@ const AddProperty = () => {
       mainImage &&
       images */
     ) {
-      const data = {
-        title,
-        street,
-        type,
-        postalCode,
-        city,
-        country,
-        description,
-        bedrooms,
-        bathrooms,
-        guestCapacity,
-        size,
-        price,
-<<<<<<< HEAD
-        mainImage,
-        images
-=======
-        /*         mainImage,
-        images, */
->>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
-      };
-
       const formData = new FormData();
       formData.append("mainImage", mainImage);
+      formData.append("title", title);
+      formData.append("street", street);
+      formData.append("type", type);
+      formData.append("postalCode", postalCode);
+      formData.append("city", city);
+      formData.append("country", country);
+      formData.append("description", description);
+      formData.append("bedrooms", bedrooms);
+      formData.append("bathrooms", bathrooms);
+      formData.append("guestCapacity", guestCapacity);
+      formData.append("size", size);
+      formData.append("price", price);
+      //formData.append("images", images);
+
       console.log(formData);
       axios({
         method: "POST",
         url: "http://localhost:9090/properties/create",
         withCredentials: true,
-<<<<<<< HEAD
+        data: formData,
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: data
+          "Content-Type": "multipart/form-data"
+        }
       }).then(res => {
-=======
-        data: formData,
-      }).then((res) => {
         console.log(res);
->>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
         if (res.status === 200) {
           setMessage(`New property ${title} created.`);
         } else setMessage("Failed to add property.");
@@ -194,13 +176,9 @@ const AddProperty = () => {
           type="file"
           alt="my property"
           accept="image/png, image/jpg, image/jpeg"
-<<<<<<< HEAD
-          onChange={event => setMainImage(event.target.value)}
-=======
-          onChange={(event) => {
+          onChange={event => {
             setMainImage(event.target.files[0]);
           }}
->>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
         ></input>
         <br></br>
         <label htmlFor="imagesInput">Images</label>
@@ -210,13 +188,9 @@ const AddProperty = () => {
           alt="my properties"
           accept="image/png, image/jpg, image/jpeg"
           multiple
-<<<<<<< HEAD
-          onChange={event => setImages(event.target.value)}
-=======
-          onChange={(event) => {
+          onChange={event => {
             //handleImagesUpload(event.target.files);
           }}
->>>>>>> 22ee6174300059e487f47c70f8f3549fede98666
         ></input>
         <br></br>
         <button onClick={handleClick}>Add Property</button>
