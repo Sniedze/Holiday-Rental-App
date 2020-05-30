@@ -1,8 +1,5 @@
 const router = require("express").Router();
-<<<<<<< HEAD
 const crypto = require("crypto");
-=======
->>>>>>> fa5e70eaa89d087a40af390de62cae679d82eb88
 const app = require("express");
 const multer = require("multer");
 const mime = require("mime");
@@ -10,7 +7,6 @@ const isAuthenticated = require("../helpers/auth_backend");
 const User = require("../models/User");
 const Property = require("../models/Property");
 const Location = require("../models/Location");
-<<<<<<< HEAD
 const Image = require("../models/Image");
 
 const imageStorage = multer.diskStorage({
@@ -27,20 +23,7 @@ const imageStorage = multer.diskStorage({
       name: imageName
     });
   }
-=======
-
-const imageStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, __dirname + "/../files/images");
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + "." + mime.getExtension(file.mimetype)
-    );
-  },
->>>>>>> fa5e70eaa89d087a40af390de62cae679d82eb88
-});
+}); ///
 const uploadImages = multer({ storage: imageStorage });
 
 router.get("/user/properties", async (req, res) => {
@@ -70,11 +53,7 @@ router.post(
     console.log(jsonData);
 
     const {
-<<<<<<< HEAD
       title
-=======
-      title,
->>>>>>> fa5e70eaa89d087a40af390de62cae679d82eb88
       // type,
       // street,
       // postalCode,
