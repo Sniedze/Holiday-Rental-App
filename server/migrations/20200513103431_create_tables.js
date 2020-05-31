@@ -9,6 +9,7 @@ exports.up = function (knex) {
     })
     .createTable("locations", (table) => {
       table.increments("id").notNullable();
+      table.string("street").notNullable();
       table.string("postal_code").notNullable();
       table.string("city").notNullable();
       table.string("country").notNullable();
@@ -16,7 +17,6 @@ exports.up = function (knex) {
     })
     .createTable("images", (table) => {
       table.increments("id").notNullable();
-      table.string("path").notNullable();
       table.string("name").notNullable();
       table.integer("size").notNullable();
     })
