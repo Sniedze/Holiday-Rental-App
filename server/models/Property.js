@@ -17,10 +17,10 @@ class Property extends Model {
         from: "property.id",
         through: {
           from: "user_properties.property_id",
-          to: "user_properties.user_id",
+          to: "user_properties.user_id"
         },
-        to: "user.id",
-      },
+        to: "user.id"
+      }
     };
   }
 
@@ -31,9 +31,9 @@ class Property extends Model {
         modelClass: Location,
         join: {
           from: "properties.location_id",
-          to: "locations.id",
-        },
-      },
+          to: "locations.id"
+        }
+      }
     };
   }
 
@@ -44,9 +44,9 @@ class Property extends Model {
         modelClass: Image,
         join: {
           from: "properties.image_id",
-          to: "image.id",
-        },
-      },
+          to: "image.id"
+        }
+      }
     };
   }
   static get relationMappings() {
@@ -56,9 +56,9 @@ class Property extends Model {
         modelClass: Rent,
         join: {
           from: "properties.rent_id",
-          to: "rent.id",
-        },
-      },
+          to: "rent.id"
+        }
+      }
     };
   }
 }

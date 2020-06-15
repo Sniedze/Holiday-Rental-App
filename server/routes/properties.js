@@ -39,6 +39,27 @@ router.get("/user/properties", async (req, res) => {
   }
 });
 
+router.get("/properties/search", async (req, res) => {
+  const { city, country, guests } = req.query;
+  //console.log(req.query);
+  if (city && country && guests) {
+    try {
+      const results = await Property.query()
+        .select("properties.*", "location.*", "images.name")
+        .join("images", { "properties.image_id": "image.id" })
+        .join("locations", { "properties.location_id": "locations.id" })
+        .where("locations.city", city)
+        .where("locations.country", country)
+        .where("properties.guests", ">=", guests);
+      console.log(results);
+      return res.status(200).send("Success");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  return res.status(404).send("Missing query data");
+});
+
 router.post(
   "/properties/create",
   uploadImages.fields([{ name: "mainImage", maxCount: 1 }]),
