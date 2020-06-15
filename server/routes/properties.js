@@ -71,8 +71,8 @@ router.post(
       } = req.body;
 
       //This is hell
+      /////////////////////////NEEDS TO BE A TRANSACTION IN CASE OF FAILURE!!!!!!!!!!!!!!!!!!!!!!
       let imageId = null;
-
       return await Image.query()
         .insert({ name: mainImage.filename, size: mainImage.size })
         .then((image) => {
