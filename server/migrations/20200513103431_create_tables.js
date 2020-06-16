@@ -1,13 +1,13 @@
-exports.up = function (knex) {
+exports.up = function(knex) {
   return knex.schema
-    .createTable("users", (table) => {
+    .createTable("users", table => {
       table.increments("id");
       table.string("first_name").notNullable();
       table.string("last_name").notNullable();
       table.string("email").notNullable();
       table.string("password").notNullable();
     })
-    .createTable("locations", (table) => {
+    .createTable("locations", table => {
       table.increments("id").notNullable();
       table.string("street").notNullable();
       table.string("postal_code").notNullable();
@@ -15,12 +15,12 @@ exports.up = function (knex) {
       table.string("country").notNullable();
       table.index(["city", "country"]);
     })
-    .createTable("images", (table) => {
+    .createTable("images", table => {
       table.increments("id").notNullable();
       table.string("name").notNullable();
       table.integer("size").notNullable();
     })
-    .createTable("properties", (table) => {
+    .createTable("properties", table => {
       table.increments("id");
       table.string("title").notNullable();
       table.enum("type", ["house", "apartment", "room"]).notNullable();
@@ -30,14 +30,20 @@ exports.up = function (knex) {
       table.integer("bathrooms").notNullable();
       table.integer("size").notNullable();
       table.float("price").notNullable();
-      table.integer("location_id").unsigned().notNullable();
+      table
+        .integer("location_id")
+        .unsigned()
+        .notNullable();
       table
         .foreign("location_id")
         .references("id")
         .inTable("locations")
         .onDelete("cascade")
         .onUpdate("cascade");
-      table.integer("image_id").unsigned().notNullable();
+      table
+        .integer("image_id")
+        .unsigned()
+        .notNullable();
       table
         .foreign("image_id")
         .references("id")
@@ -46,15 +52,21 @@ exports.up = function (knex) {
         .onUpdate("cascade");
       table.index(["guest_capacity", "type"]);
     })
-    .createTable("user_properties", (table) => {
-      table.integer("property_id").unsigned().notNullable();
+    .createTable("user_properties", table => {
+      table
+        .integer("property_id")
+        .unsigned()
+        .notNullable();
       table
         .foreign("property_id")
         .references("id")
         .inTable("properties")
         .onDelete("cascade")
         .onUpdate("cascade");
-      table.integer("user_id").unsigned().notNullable();
+      table
+        .integer("user_id")
+        .unsigned()
+        .notNullable();
       table
         .foreign("user_id")
         .references("id")
@@ -62,9 +74,12 @@ exports.up = function (knex) {
         .onDelete("cascade")
         .onUpdate("cascade");
     })
-    .createTable("rents", (table) => {
+    .createTable("rents", table => {
       table.increments("id").notNullable();
-      table.integer("property_id").unsigned().notNullable();
+      table
+        .integer("property_id")
+        .unsigned()
+        .notNullable();
       table
         .foreign("property_id")
         .references("id")
@@ -77,7 +92,7 @@ exports.up = function (knex) {
     });
 };
 
-exports.down = function (knex) {
+exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists("rents")
     .dropTableIfExists("user_properties")

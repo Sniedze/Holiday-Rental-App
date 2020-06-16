@@ -1,7 +1,13 @@
 import React from "react";
+import "../styling/css/Footer.css";
 
 const Footer = () => {
-  return <h1>Footer</h1>;
+  return (
+    <div class="jumbotron text-center">
+      <p>© Copyright 2020</p>
+      <h3>Holiday House</h3>
+    </div>
+  );
 };
 
 export default Footer;

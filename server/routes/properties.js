@@ -9,19 +9,18 @@ const Location = require("../models/Location");
 const Image = require("../models/Image");
 const UserProperties = require("../models/UserProperties");
 
-//////////////////////////////////////Image upload to disk
 const imageStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function(req, file, cb) {
     cb(null, __dirname + "/../files/images"); // cb = part of multer, callback
   },
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     cb(
       null,
       crypto.randomBytes(16).toString("hex") +
         "." +
         mime.getExtension(file.mimetype)
     );
-  },
+  }
 });
 const uploadImages = multer({ storage: imageStorage });
 
@@ -41,7 +40,27 @@ router.get("/user/properties", async (req, res) => {
   }
 });
 
-/////////////////////////Post a property
+router.get("/properties/search", async (req, res) => {
+  const { city, country, guests } = req.query;
+  //console.log(req.query);
+  if (city && country && guests) {
+    try {
+      const results = await Property.query()
+        .select("properties.*", "locations.*", "images.name")
+        .join("images", { "properties.image_id": "image_id" })
+        .join("locations", { "properties.location_id": "locations.id" })
+        .where("locations.city", city)
+        .where("locations.country", country)
+        .where("properties.guest_capacity", ">=", guests);
+      console.log(results);
+      return res.status(200).send({ results });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  return res.status(404).send("Missing query data");
+});
+
 router.post(
   "/properties/create",
   isAuthenticated,
@@ -51,7 +70,7 @@ router.post(
       const userId = req.session.user.id;
       const mainImage = {
         filename: req.files.mainImage[0].filename,
-        size: req.files.mainImage[0].size,
+        size: req.files.mainImage[0].size
       };
 
       const {
@@ -67,7 +86,7 @@ router.post(
         street,
         postalCode,
         city,
-        country,
+        country
       } = req.body;
 
       //This is hell
@@ -75,16 +94,16 @@ router.post(
 
       return await Image.query()
         .insert({ name: mainImage.filename, size: mainImage.size })
-        .then((image) => {
+        .then(image => {
           imageId = image.id;
           return Location.query().insert({
             street,
             postal_code: postalCode,
             city,
-            country,
+            country
           });
         })
-        .then((location) => {
+        .then(location => {
           return Property.query().insert({
             title,
             type,
@@ -95,18 +114,18 @@ router.post(
             size,
             price,
             location_id: location.id,
-            image_id: imageId,
+            image_id: imageId
           });
         })
-        .then((property) => {
+        .then(property => {
           return UserProperties.query().insert({
             property_id: property.id,
-            user_id: userId,
+            user_id: userId
           });
         })
         .then(
           res.status(200).send({
-            response: "Property added",
+            response: "Property added"
           })
         );
     }
