@@ -4,6 +4,7 @@ import MomentUtils from "@date-io/moment";
 import DateFnsUtils from "@date-io/date-fns";
 import LuxonUtils from "@date-io/luxon";
 import { DatePicker } from "@material-ui/pickers";
+import "../styling/css/Search.css";
 
 const Search = () => {
   const [city, setCity] = useState("");
@@ -19,33 +20,40 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="City"
-        value={city}
-        onChange={(event) => setCity(event.target.value)}
-      ></input>
-      <br></br>
-      <input
-        type="text"
-        placeholder="Country"
-        value={country}
-        onChange={(event) => setCountry(event.target.value)}
-      ></input>
-      <br />
-      <MuiPickersUtilsProvider utils={(DateFnsUtils, MomentUtils, LuxonUtils)}>
-        <DatePicker value={arrivalDate} onChange={setArrivalDate} />
-        <br></br>
-        <DatePicker value={checkOutDate} onChange={setCheckOutDate} />
-      </MuiPickersUtilsProvider>
-      <br></br>
-      <input
-        type="number"
-        min="1"
-        placeholder="Guests"
-        onChange={(event) => setGuests(event.target.value)}
-      ></input>
-      <br />
+      <div class="form-group">
+        <input
+          placeholder="City....."
+          type="text"
+          value={city}
+          onChange={(event) => setCity(event.target.value)}
+        />
+      </div>
+      <div class="form-group">
+        <input
+          placeholder="Country....."
+          type="text"
+          value={country}
+          onChange={(event) => setCountry(event.target.value)}
+        ></input>
+      </div>
+      <div class="form-group">
+        <input
+          type="number"
+          min="1"
+          value={guests}
+          onChange={(event) => setGuests(event.target.value)}
+        ></input>
+      </div>
+      <div class="form-group">
+        <MuiPickersUtilsProvider
+          utils={(DateFnsUtils, MomentUtils, LuxonUtils)}
+        >
+          <DatePicker value={arrivalDate} onChange={setArrivalDate} />
+          <br></br>
+          <DatePicker value={checkOutDate} onChange={setCheckOutDate} />
+        </MuiPickersUtilsProvider>
+      </div>
+
       <button>Search</button>
     </form>
   );

@@ -1,0 +1,24 @@
+.navbar {
+  margin-bottom: 0;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+  font-family: Heiti SC;
+}
+.navbar li a {
+  color: #fff !important;
+  margin-right: 40px;
+}
+
+.navbar-nav li a:hover,
+.navbar-nav li.active a {
+  color: rgb(174, 134, 37) !important;
+  background-color: #fff !important;
+}
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: rgb(174, 134, 37) !important;
+}

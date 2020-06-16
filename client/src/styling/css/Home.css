@@ -1,0 +1,34 @@
+body {
+  background-color: rgb(50, 57, 65);
+}
+
+h1 {
+  color: whitesmoke;
+  font-family: Heiti SC;
+}
+
+h2 {
+  color: whitesmoke;
+  font-family: Heiti SC;
+}
+
+p {
+  color: whitesmoke;
+  font-family: Heiti SC;
+}
+
+.container-fluid {
+  margin-top: 50px;
+}
+
+hr {
+  border: 0;
+  border-top: 3px solid rgb(174, 134, 37);
+}
+.container-1 {
+  padding-top: 25%;
+}
+
+.img-thumbnail {
+  border: 35px solid white;
+}

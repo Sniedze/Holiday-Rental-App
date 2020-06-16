@@ -9,7 +9,6 @@ const Location = require("../models/Location");
 const Image = require("../models/Image");
 const UserProperties = require("../models/UserProperties");
 
-//////////////////////////////////////Image upload to disk
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname + "/../files/images"); // cb = part of multer, callback
@@ -41,20 +40,23 @@ router.get("/user/properties", async (req, res) => {
   }
 });
 
-router.get("properties/search", async (req, res) => {
+router.get("/properties/search", async (req, res) => {
   const { city, country, guest_capacity } = req.query;
-  if (city && country && guests_capacity) {
+  if (city && country && guest_capacity) {
     try {
-      const result = await Property.query()
+      const results = await Property.query()
         .select("properties.*", "locations.*", "images.name")
-        .innerJoin("locations", "properties")
-        .where({ "locations.city": city })
-        .andWhere("locations.country", country)
-        .andWhere("guest_capacity", guest_capacity);
-      return res.status(200).send({ result });
-    } catch (err) {}
+        .joinRelated("[locations, images]")
+        .where("locations.city", city)
+        .where("locations.country", country)
+        .where("properties.guest_capacity", ">=", guest_capacity);
+      console.log(results);
+      return res.status(200).send({ results });
+    } catch (error) {
+      console.log(error);
+    }
   }
-  return res.send("Invalid query data");
+  return res.status(404).send("Missing query data");
 });
 
 /////////////////////////Post a property

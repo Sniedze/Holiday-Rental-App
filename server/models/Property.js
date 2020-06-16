@@ -21,12 +21,7 @@ class Property extends Model {
         },
         to: "user.id",
       },
-    };
-  }
-
-  static get relationMappings() {
-    return {
-      location: {
+      locations: {
         relation: Model.BelongsToOneRelation,
         modelClass: Location,
         join: {
@@ -34,23 +29,14 @@ class Property extends Model {
           to: "locations.id",
         },
       },
-    };
-  }
-
-  static get relationMappings() {
-    return {
-      image: {
+      images: {
         relation: Model.HasManyRelation,
         modelClass: Image,
         join: {
           from: "properties.image_id",
-          to: "image.id",
+          to: "images.id",
         },
       },
-    };
-  }
-  static get relationMappings() {
-    return {
       rent: {
         relation: Model.HasManyRelation,
         modelClass: Rent,
@@ -61,6 +47,44 @@ class Property extends Model {
       },
     };
   }
+
+  // static get relationMappings() {
+  //   return {
+  //     locations: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Location,
+  //       join: {
+  //         from: "properties.location_id",
+  //         to: "locations.id",
+  //       },
+  //     },
+  //   };
+  // }
+
+  // static get relationMappings() {
+  //   return {
+  //     images: {
+  //       relation: Model.HasManyRelation,
+  //       modelClass: Image,
+  //       join: {
+  //         from: "properties.image_id",
+  //         to: "images.id",
+  //       },
+  //     },
+  //   };
+  // }
+  // static get relationMappings() {
+  //   return {
+  //     rent: {
+  //       relation: Model.HasManyRelation,
+  //       modelClass: Rent,
+  //       join: {
+  //         from: "properties.rent_id",
+  //         to: "rent.id",
+  //       },
+  //     },
+  //   };
+  // }
 }
 
 module.exports = Property;
