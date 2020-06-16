@@ -42,7 +42,6 @@ router.get("/user/properties", async (req, res) => {
 
 router.get("/properties/search", async (req, res) => {
   const { city, country, guests } = req.query;
-  //console.log(req.query);
   if (city && country && guests) {
     try {
       const results = await Property.query()
