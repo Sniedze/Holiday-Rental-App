@@ -41,6 +41,22 @@ router.get("/user/properties", async (req, res) => {
   }
 });
 
+router.get("properties/search", async (req, res) => {
+  const { city, country, guest_capacity } = req.query;
+  if (city && country && guests_capacity) {
+    try {
+      const result = await Property.query()
+        .select("properties.*", "locations.*", "images.name")
+        .innerJoin("locations", "properties")
+        .where({ "locations.city": city })
+        .andWhere("locations.country", country)
+        .andWhere("guest_capacity", guest_capacity);
+      return res.status(200).send({ result });
+    } catch (err) {}
+  }
+  return res.send("Invalid query data");
+});
+
 /////////////////////////Post a property
 router.post(
   "/properties/create",
@@ -63,7 +79,6 @@ router.post(
         price,
         description,
         guestCapacity,
-        //location//
         street,
         postalCode,
         city,
