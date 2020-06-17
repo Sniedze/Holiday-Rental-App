@@ -21,11 +21,14 @@ const Property = ({ props }) => {
               color: "white",
             }}
           >
-            <h5>{data.price}</h5>
+            <h5>Price: {data.price} EUR</h5>
           </div>
           <p className="card-text" style={{ color: "black" }}>
             {data.description}
           </p>
+          <h5>Bedrooms: {data.bedrooms} EUR</h5>
+          <h5>Bathrooms: {data.bathrooms} EUR</h5>
+          <h5>Maximum number of guests: {data.guest_capacity} EUR</h5>
           <button type="button" className="btn btn-warning">
             View More
           </button>
