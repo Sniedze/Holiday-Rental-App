@@ -13,7 +13,7 @@ import { authenticate } from "./functions/auth";
 import AddProperty from "./pages/AddProperty";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   useEffect(() => {
     authenticate(setIsAuth); // calling the function and changing the state
   }, []); // [ ] = list of dependencies
