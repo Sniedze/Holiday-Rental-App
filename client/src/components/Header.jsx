@@ -14,42 +14,42 @@ const Header = props => {
   };
 
   return (
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-      <a class="navbar-brand text-center w-100 " href="/">
+    <nav className="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+      <a className="navbar-brand text-center w-100 " href="/">
         <img src="/Logo.png" alt="logo" style={{ width: 200 }}></img>
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#collapsibleNavbar"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav text-center">
+      <div className="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul className="navbar-nav text-center">
           {isAuth ? (
             <>
-              <li class="nav-item">
-                <a class="nav-link" href="/profile">
+              <li className="nav-item">
+                <a className="nav-link" href="/profile">
                   Profile
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" to="/" onClick={handleClick}>
+              <li className="nav-item">
+                <a className="nav-link" to="/" onClick={handleClick}>
                   Logout
                 </a>
               </li>
             </>
           ) : (
             <>
-              <li class="nav-item ">
-                <a class="nav-link" href="/login">
+              <li className="nav-item ">
+                <a className="nav-link" href="/login">
                   Login
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/signup">
+              <li className="nav-item">
+                <a className="nav-link" href="/signup">
                   Register
                 </a>
               </li>
