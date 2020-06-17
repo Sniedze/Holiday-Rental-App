@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
-import DateFnsUtils from "@date-io/date-fns";
-import LuxonUtils from "@date-io/luxon";
-import { DatePicker } from "@material-ui/pickers";
 import "../styling/css/Search.css";
 
 const Search = () => {
   const history = useHistory();
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-  const [arrivalDate, setArrivalDate] = useState(new Date());
-  const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [guests, setGuests] = useState(1);
 
   const handleSubmit = event => {
@@ -27,7 +20,7 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="form-group">
+      <div className="form-group">
         <input
           placeholder="City....."
           type="text"
@@ -35,7 +28,7 @@ const Search = () => {
           onChange={event => setCity(event.target.value)}
         />
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <input
           placeholder="Country....."
           type="text"
@@ -43,7 +36,7 @@ const Search = () => {
           onChange={event => setCountry(event.target.value)}
         ></input>
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <input
           type="number"
           min="1"

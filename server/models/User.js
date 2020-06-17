@@ -8,16 +8,18 @@ class User extends Model {
 
   static get relationMappings() {
     return {
-      relation: Model.HasManyRelation,
-      modelClass: Property,
-      join: {
-        from: "user.id",
-        through: {
-          from: "user_properties.user_id",
-          to: "user_properties.property_id",
-        },
-        to: "property.id",
-      },
+      properties: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Property,
+        join: {
+          from: "users.id",
+          through: {
+            from: "user_properties.user_id",
+            to: "user_properties.property_id"
+          },
+          to: "properties.id"
+        }
+      }
     };
   }
 }

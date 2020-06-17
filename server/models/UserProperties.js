@@ -12,18 +12,14 @@ class UserProperties extends Model {
       modelClass: User,
       join: {
         from: "user_properties.user_id",
-        to: "users.id",
+        to: "users.id"
       },
-    };
-  }
-  static get relationMappings() {
-    return {
       relation: Model.BelongsToOneRelation,
       modelClass: Property,
       join: {
         from: "user_properties.property_id",
-        to: "properties.id",
-      },
+        to: "properties.id"
+      }
     };
   }
 }
