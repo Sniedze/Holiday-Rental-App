@@ -36,7 +36,8 @@ function App() {
           ></PrivateRoute>
           <PrivateRoute
             path="/property/:id"
-            component={(props) => <Property {...props} />}
+            isAuth={isAuth}
+            component={(props) => <Property />}
           />
           <PrivateRoute
             path="/property/create"
