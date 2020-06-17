@@ -2,25 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Results = props => {
+const Results = (props) => {
   const history = useHistory();
 
   const [results, setResults] = useState([]);
   //const [city, setCity] = useState("");
   //const [country, setCountry] = useState("");
   //const [guests, setGuests] = useState("");
-
-  const getResults = async (city, country, guests) => {
-    try {
-      let response = await axios.get(
-        `http://localhost:9090/properties/search?city=${city}&country=${country}&guest_capacity=${guests}`
-      );
-      setResults(response.data.results);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -33,7 +21,19 @@ const Results = props => {
     }
 
     getResults(city, country, guests);
-  }, []);
+  }, [history]);
+
+  const getResults = async (city, country, guests) => {
+    try {
+      let response = await axios.get(
+        `http://localhost:9090/properties/search?city=${city}&country=${country}&guest_capacity=${guests}`
+      );
+      setResults(response.data.results);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
