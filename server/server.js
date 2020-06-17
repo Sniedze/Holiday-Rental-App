@@ -16,7 +16,7 @@ const key = require("./config/key");
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
   })
 );
 
@@ -43,9 +43,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 6000000
+      expires: 6000000,
     },
-    store: store
+    store: store,
   })
 );
 
@@ -58,7 +58,7 @@ app.use("/images", express.static(path.join(__dirname, "files", "images")));
 /* Start the server, KEEP AT THE BOTTOM  */
 const port = process.env.PORT || 9090;
 
-const server = app.listen(port, error => {
+const server = app.listen(port, (error) => {
   if (error) {
     console.log("Error running Express");
   }

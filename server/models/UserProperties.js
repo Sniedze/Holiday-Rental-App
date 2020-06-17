@@ -14,10 +14,6 @@ class UserProperties extends Model {
         from: "user_properties.user_id",
         to: "users.id",
       },
-    };
-  }
-  static get relationMappings() {
-    return {
       relation: Model.BelongsToOneRelation,
       modelClass: Property,
       join: {

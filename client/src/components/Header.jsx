@@ -4,13 +4,13 @@ import { logout } from "../functions/logout";
 import { useHistory } from "react-router-dom";
 import "../styling/css/Navbar.css";
 
-const Header = (props) => {
+const Header = (props, handleLogout) => {
   const history = useHistory();
   const { isAuth, setIsAuth } = props;
 
   const handleClick = () => {
     logout(setIsAuth);
-    history.replace("/home");
+    history.replace("/");
   };
 
   return (

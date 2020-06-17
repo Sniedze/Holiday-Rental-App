@@ -29,8 +29,8 @@ const uploadImages = multer({ storage: imageStorage });
 ///////////Get User Properties
 router.get("/user/properties", async (req, res) => {
   const { id } = req.session.user;
-  console.log(req.session.user);
   const user = await User.query().findById(id);
+
   const usersProperties = await user.$relatedQuery("properties");
   try {
     if (usersProperties) {
