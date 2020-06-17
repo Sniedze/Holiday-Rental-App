@@ -84,7 +84,9 @@ const Profile = () => {
         >
           <div>
             <div>
-              <p className="mt-3">{user.email}</p>
+              <p className="mt-3" style={{ color: "black" }}>
+                {user.email}
+              </p>
               {informations &&
                 informations.map(information => <p>{information.data}</p>)}
             </div>
