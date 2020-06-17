@@ -31,7 +31,10 @@ router.get("/user/properties", async (req, res) => {
   const { id } = req.session.user;
   const user = await User.query().findById(id);
 
-  const usersProperties = await user.$relatedQuery("properties");
+  const usersProperties = await user
+    .$relatedQuery("properties")
+    .withGraphFetched("locations")
+    .withGraphFetched("images");
   try {
     if (usersProperties) {
       return res.status(200).send({ usersProperties: usersProperties });

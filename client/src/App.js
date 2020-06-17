@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Property from "./pages/Property";
 import Results from "./pages/Results";
 import PrivateRoute from "./components/PrivateRoute";
 import { authenticate } from "./functions/auth";
@@ -33,6 +34,10 @@ function App() {
             isAuth={isAuth}
             component={(props) => <Profile />}
           ></PrivateRoute>
+          <PrivateRoute
+            path="/property/:id"
+            component={(props) => <Property {...props} />}
+          />
           <PrivateRoute
             path="/property/create"
             isAuth={isAuth}
