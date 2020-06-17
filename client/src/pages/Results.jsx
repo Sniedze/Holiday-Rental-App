@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Results = props => {
+const Results = (props) => {
   const history = useHistory();
 
   const [results, setResults] = useState([]);
@@ -45,7 +45,7 @@ const Results = props => {
                 <div className="col-md-6 col-sm-12">
                   <img
                     className="rounded shadow-lg"
-                    src={`http://localhost:9090/images/${result.name}`}
+                    src={`http://localhost:9090/images/${result.image_name}`}
                     alt=""
                   ></img>
                 </div>
