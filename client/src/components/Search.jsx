@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import DateFnsUtils from "@date-io/date-fns";
@@ -7,15 +8,21 @@ import { DatePicker } from "@material-ui/pickers";
 import "../styling/css/Search.css";
 
 const Search = () => {
+  const history = useHistory();
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [arrivalDate, setArrivalDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [guests, setGuests] = useState(1);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    console.log(city, country, arrivalDate, checkOutDate, guests);
+    history.push({
+      state: { city, country, guests },
+      pathname: "/results",
+      search: `?city=${city}&country=${country}&guest_capacity=${guests}`
+    });
+    //console.log(city, country, guests);
   };
 
   return (
@@ -25,7 +32,7 @@ const Search = () => {
           placeholder="City....."
           type="text"
           value={city}
-          onChange={(event) => setCity(event.target.value)}
+          onChange={event => setCity(event.target.value)}
         />
       </div>
       <div class="form-group">
@@ -33,7 +40,7 @@ const Search = () => {
           placeholder="Country....."
           type="text"
           value={country}
-          onChange={(event) => setCountry(event.target.value)}
+          onChange={event => setCountry(event.target.value)}
         ></input>
       </div>
       <div class="form-group">
@@ -41,7 +48,7 @@ const Search = () => {
           type="number"
           min="1"
           value={guests}
-          onChange={(event) => setGuests(event.target.value)}
+          onChange={event => setGuests(event.target.value)}
         ></input>
       </div>
       <div class="form-group">

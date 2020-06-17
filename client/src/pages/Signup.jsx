@@ -13,7 +13,7 @@ const Signup = () => {
   const [signedUp, setSignUp] = useState(false);
   const [error, setError] = useState("");
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     event.preventDefault();
     //console.log(firstName, lastName, email);
 
@@ -30,13 +30,13 @@ const Signup = () => {
           firstName,
           lastName,
           email,
-          password,
+          password
         })
-        .then(function (response) {
+        .then(function(response) {
           setSignUp(true); // changing hook state
           history.push("/login");
         })
-        .catch(function (error) {
+        .catch(function(error) {
           if (error.response.status === 400) {
             setError("User with this email already exists");
           } else setError("Server error");
@@ -59,35 +59,35 @@ const Signup = () => {
               placeholder="First Name"
               name="firstName"
               required
-              onChange={(event) => setFirstName(event.target.value)}
+              onChange={event => setFirstName(event.target.value)}
             ></input>
             <input
               type="text"
               placeholder="Last Name"
               name="lastName"
               //required
-              onChange={(event) => setLastName(event.target.value)}
+              onChange={event => setLastName(event.target.value)}
             ></input>
             <input
               type="email"
               placeholder="Email"
               name="email"
               //required
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={event => setEmail(event.target.value)}
             ></input>
             <input
               type="password"
               placeholder="Password"
               name="password"
               //required
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={event => setPassword(event.target.value)}
             ></input>
             <input
               type="password"
               placeholder="Repeat Password"
               name="repeatPassword"
               //required
-              onChange={(event) => setRepeatPassword(event.target.value)}
+              onChange={event => setRepeatPassword(event.target.value)}
             ></input>
             <button type="submit" onClick={handleClick}>
               CREATE

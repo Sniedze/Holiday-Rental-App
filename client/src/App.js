@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Results from "./pages/Results";
 import PrivateRoute from "./components/PrivateRoute";
 import { authenticate } from "./functions/auth";
 import AddProperty from "./pages/AddProperty";
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={props => <Home />}></Route>
           <Route path="/signup" component={props => <Signup />}></Route>
+          <Route path="/results" component={props => <Results />}></Route>
           <Route
             path="/login"
             component={props => <Login setIsAuth={setIsAuth} />}
