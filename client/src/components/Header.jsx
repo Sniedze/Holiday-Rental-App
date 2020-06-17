@@ -4,7 +4,11 @@ import { logout } from "../functions/logout";
 import { useHistory } from "react-router-dom";
 import "../styling/css/Navbar.css";
 
+<<<<<<< HEAD
 const Header = (props, handleLogout) => {
+=======
+const Header = props => {
+>>>>>>> a3ecad44075f6af946896f7645241ff701c2bddb
   const history = useHistory();
   const { isAuth, setIsAuth } = props;
 
