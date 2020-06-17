@@ -17,50 +17,74 @@ class Property extends Model {
         from: "property.id",
         through: {
           from: "user_properties.property_id",
-          to: "user_properties.user_id"
+          to: "user_properties.user_id",
         },
-        to: "user.id"
-      }
-    };
-  }
-
-  static get relationMappings() {
-    return {
-      location: {
+        to: "user.id",
+      },
+      locations: {
         relation: Model.BelongsToOneRelation,
         modelClass: Location,
         join: {
           from: "properties.location_id",
-          to: "locations.id"
-        }
-      }
-    };
-  }
-
-  static get relationMappings() {
-    return {
-      image: {
+          to: "locations.id",
+        },
+      },
+      images: {
         relation: Model.HasManyRelation,
         modelClass: Image,
         join: {
           from: "properties.image_id",
-          to: "image.id"
-        }
-      }
-    };
-  }
-  static get relationMappings() {
-    return {
+          to: "images.id",
+        },
+      },
       rent: {
         relation: Model.HasManyRelation,
         modelClass: Rent,
         join: {
           from: "properties.rent_id",
-          to: "rent.id"
-        }
-      }
+          to: "rent.id",
+        },
+      },
     };
   }
+
+  // static get relationMappings() {
+  //   return {
+  //     locations: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Location,
+  //       join: {
+  //         from: "properties.location_id",
+  //         to: "locations.id",
+  //       },
+  //     },
+  //   };
+  // }
+
+  // static get relationMappings() {
+  //   return {
+  //     images: {
+  //       relation: Model.HasManyRelation,
+  //       modelClass: Image,
+  //       join: {
+  //         from: "properties.image_id",
+  //         to: "images.id",
+  //       },
+  //     },
+  //   };
+  // }
+  // static get relationMappings() {
+  //   return {
+  //     rent: {
+  //       relation: Model.HasManyRelation,
+  //       modelClass: Rent,
+  //       join: {
+  //         from: "properties.rent_id",
+  //         to: "rent.id",
+  //       },
+  //     },
+  //   };
+  // }
 }
 
 module.exports = Property;

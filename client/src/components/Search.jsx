@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import DateFnsUtils from "@date-io/date-fns";
@@ -7,6 +8,7 @@ import { DatePicker } from "@material-ui/pickers";
 import "../styling/css/Search.css";
 
 const Search = () => {
+  const history = useHistory();
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [arrivalDate, setArrivalDate] = useState(new Date());
@@ -15,7 +17,12 @@ const Search = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(city, country, arrivalDate, checkOutDate, guests);
+    history.push({
+      state: { city, country, guests },
+      pathname: "/results",
+      search: `?city=${city}&country=${country}&guest_capacity=${guests}`
+    });
+    //console.log(city, country, guests);
   };
 
   return (

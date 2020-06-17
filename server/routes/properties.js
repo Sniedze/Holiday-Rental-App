@@ -41,16 +41,16 @@ router.get("/user/properties", async (req, res) => {
 });
 
 router.get("/properties/search", async (req, res) => {
-  const { city, country, guests } = req.query;
-  if (city && country && guests) {
+  const { city, country, guest_capacity } = req.query;
+  console.log(req.query);
+  if (city && country && guest_capacity) {
     try {
       const results = await Property.query()
         .select("properties.*", "locations.*", "images.name")
-        .join("images", { "properties.image_id": "image_id" })
-        .join("locations", { "properties.location_id": "locations.id" })
+        .joinRelated("[locations, images]")
         .where("locations.city", city)
         .where("locations.country", country)
-        .where("properties.guest_capacity", ">=", guests);
+        .where("properties.guest_capacity", ">=", guest_capacity);
       console.log(results);
       return res.status(200).send({ results });
     } catch (error) {
@@ -60,6 +60,7 @@ router.get("/properties/search", async (req, res) => {
   return res.status(404).send("Missing query data");
 });
 
+/////////////////////////Post a property
 router.post(
   "/properties/create",
   isAuthenticated,
@@ -81,7 +82,6 @@ router.post(
         price,
         description,
         guestCapacity,
-        //location//
         street,
         postalCode,
         city,

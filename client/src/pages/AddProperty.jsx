@@ -2,7 +2,7 @@ import React, { useState } from "react";
 const axios = require("axios");
 
 const AddProperty = () => {
-  const multipleImages = [];
+  //const multipleImages = [];
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [street, setStreet] = useState("");
@@ -57,7 +57,7 @@ const AddProperty = () => {
       formData.append("guestCapacity", guestCapacity);
       formData.append("size", size);
       formData.append("price", price);
-      //formData.append("images", images);
+      formData.append("images", images);
       console.log(formData["size"]);
       axios({
         method: "POST",
