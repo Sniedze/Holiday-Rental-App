@@ -48,11 +48,13 @@ const Login = ({ setIsAuth }) => {
           type="email"
           required
           onChange={event => setEmail(event.target.value)}
+          style={{ color: "black" }}
         ></input>
         <input
           type="password"
           required
           onChange={event => setPassword(event.target.value)}
+          style={{ color: "black" }}
         ></input>
         <button onClick={handleClick}>LOGIN</button>
       </form>

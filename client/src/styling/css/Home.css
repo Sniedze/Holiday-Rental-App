@@ -2,6 +2,10 @@ body {
   background-color: rgb(50, 57, 65);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 h1 {
   color: whitesmoke;
   font-family: Heiti SC;

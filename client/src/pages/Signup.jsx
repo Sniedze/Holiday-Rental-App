@@ -52,44 +52,65 @@ const Signup = () => {
         <h1>User Created</h1>
       ) : (
         <div className="container">
-          <h1>Create the profile</h1>
           <form method="POST">
-            <input
-              type="text"
-              placeholder="First Name"
-              name="firstName"
-              required
-              onChange={event => setFirstName(event.target.value)}
-            ></input>
-            <input
-              type="text"
-              placeholder="Last Name"
-              name="lastName"
-              //required
-              onChange={event => setLastName(event.target.value)}
-            ></input>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              //required
-              onChange={event => setEmail(event.target.value)}
-            ></input>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              //required
-              onChange={event => setPassword(event.target.value)}
-            ></input>
-            <input
-              type="password"
-              placeholder="Repeat Password"
-              name="repeatPassword"
-              //required
-              onChange={event => setRepeatPassword(event.target.value)}
-            ></input>
-            <button type="submit" onClick={handleClick}>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  name="firstName"
+                  required
+                  onChange={event => setFirstName(event.target.value)}
+                ></input>
+              </div>
+              <div className="col-6">
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  name="lastName"
+                  //required
+                  onChange={event => setLastName(event.target.value)}
+                ></input>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  //required
+                  onChange={event => setEmail(event.target.value)}
+                ></input>
+              </div>
+              <div className="col-6">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  //required
+                  onChange={event => setPassword(event.target.value)}
+                ></input>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  type="password"
+                  placeholder="Repeat Password"
+                  name="repeatPassword"
+                  //required
+                  onChange={event => setRepeatPassword(event.target.value)}
+                ></input>
+              </div>
+              <div className="col-6"></div>
+            </div>
+            <br></br>
+            <button
+              type="submit"
+              className="btn btn-dark"
+              onClick={handleClick}
+            >
               CREATE
             </button>
           </form>

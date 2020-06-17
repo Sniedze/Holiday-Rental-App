@@ -51,17 +51,8 @@ const Search = () => {
           onChange={event => setGuests(event.target.value)}
         ></input>
       </div>
-      <div class="form-group">
-        <MuiPickersUtilsProvider
-          utils={(DateFnsUtils, MomentUtils, LuxonUtils)}
-        >
-          <DatePicker value={arrivalDate} onChange={setArrivalDate} />
-          <br></br>
-          <DatePicker value={checkOutDate} onChange={setCheckOutDate} />
-        </MuiPickersUtilsProvider>
-      </div>
 
-      <button>Search</button>
+      <button className="btn btn-dark">Search</button>
     </form>
   );
 };

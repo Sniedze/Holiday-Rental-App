@@ -22,7 +22,6 @@ function App() {
         <Header isAuth={isAuth} setIsAuth={setIsAuth} />
         <Switch>
           <Route exact path="/" component={props => <Home />}></Route>
-          <Route path="/signup" component={props => <Signup />}></Route>
           <Route path="/results" component={props => <Results />}></Route>
           <Route
             path="/login"

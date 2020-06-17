@@ -10,18 +10,6 @@ const Results = props => {
   //const [country, setCountry] = useState("");
   //const [guests, setGuests] = useState("");
 
-  const getResults = async (city, country, guests) => {
-    try {
-      let response = await axios.get(
-        `http://localhost:9090/properties/search?city=${city}&country=${country}&guest_capacity=${guests}`
-      );
-      setResults(response.data.results);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const city = params.get("city");
@@ -33,7 +21,19 @@ const Results = props => {
     }
 
     getResults(city, country, guests);
-  }, []);
+  }, [history]);
+
+  const getResults = async (city, country, guests) => {
+    try {
+      let response = await axios.get(
+        `http://localhost:9090/properties/search?city=${city}&country=${country}&guest_capacity=${guests}`
+      );
+      setResults(response.data.results);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
