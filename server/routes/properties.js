@@ -79,18 +79,25 @@ router.get("/property/:id", async (req, res) => {
 });
 
 /////////////////////////Post a property
+const propertyFiles = uploadImages.fields([
+  { name: "mainImage", maxCount: 1 },
+  { name: "images", maxCount: 6 },
+]);
 router.post(
   "/properties/create",
   isAuthenticated,
-  uploadImages.fields([{ name: "mainImage", maxCount: 1 }]),
+  propertyFiles,
   async (req, res) => {
-    if (req.files.mainImage[0]) {
+    if (req.files.mainImage[0] && req.files.images) {
       const userId = req.session.user.id;
+      const images = [];
       const mainImage = {
-        filename: req.files.mainImage[0].filename,
+        name: req.files.mainImage[0].filename,
         size: req.files.mainImage[0].size,
       };
-
+      req.files.images.forEach((img) => {
+        images.push({ name: img.filename, size: img.size });
+      });
       const {
         title,
         type,
@@ -106,45 +113,50 @@ router.post(
         country,
       } = req.body;
 
-      //This is hell
-      /////////////////////////NEEDS TO BE A TRANSACTION IN CASE OF FAILURE!!!!!!!!!!!!!!!!!!!!!!
-      let imageId = null;
-      return await Image.query()
-        .insert({ name: mainImage.filename, size: mainImage.size })
-        .then((image) => {
-          imageId = image.id;
-          return Location.query().insert({
-            street,
-            postal_code: postalCode,
-            city,
-            country,
-          });
-        })
-        .then((location) => {
-          return Property.query().insert({
-            title,
-            type,
-            description,
-            bedrooms,
-            guest_capacity: guestCapacity,
-            bathrooms,
-            size,
-            price,
-            location_id: location.id,
-            image_id: imageId,
-          });
-        })
-        .then((property) => {
-          return UserProperties.query().insert({
-            property_id: property.id,
-            user_id: userId,
-          });
-        })
-        .then(
-          res.status(200).send({
-            response: "Property added",
+      try {
+        let imageId = null;
+
+        return await Image.query()
+          .insert({ name: mainImage.filename, size: mainImage.size })
+          .then((image) => {
+            imageId = image.id;
+            return Location.query().insert({
+              street,
+              postal_code: postalCode,
+              city,
+              country,
+            });
           })
-        );
+          .then((location) => {
+            return Property.query().insert({
+              title,
+              type,
+              description,
+              bedrooms,
+              guest_capacity: guestCapacity,
+              bathrooms,
+              size,
+              price,
+              location_id: location.id,
+              image_id: imageId,
+            });
+          })
+          .then((property) => {
+            return UserProperties.query().insert({
+              property_id: property.id,
+              user_id: userId,
+            });
+          })
+          .then(
+            res.status(200).send({
+              response: "Property added",
+            })
+          );
+      } catch (error) {
+        res.status(500).send({
+          response: "DB error",
+        });
+      }
     }
   }
 );
