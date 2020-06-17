@@ -27,7 +27,7 @@ const uploadImages = multer({ storage: imageStorage });
 //////////////////////////ENDPOINTS
 
 ///////////Get User Properties
-router.get("/user/properties", async (req, res) => {
+router.get("/user/properties", isAuthenticated, async (req, res) => {
   const { id } = req.session.user;
   const user = await User.query().findById(id);
 
