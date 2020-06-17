@@ -6,22 +6,22 @@ import Property from "./Property";
 const Profile = () => {
   const [properties, setProperties] = useState([]);
 
+  const getProperties = async () => {
+    try {
+      await axios({
+        method: "GET",
+        url: "http://localhost:9090/user/properties",
+        withCredentials: true,
+      }).then((properties) => {
+        const allProperties = properties.data.usersProperties;
+        setProperties(allProperties);
+        console.log(allProperties);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const getProperties = async () => {
-      try {
-        await axios({
-          method: "GET",
-          url: "http://localhost:9090/user/properties",
-          withCredentials: true,
-        }).then((properties) => {
-          const allProperties = properties.data.usersProperties;
-          setProperties(allProperties);
-          console.log(allProperties);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getProperties();
   }, []);
 
