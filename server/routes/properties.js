@@ -46,7 +46,7 @@ router.get("/properties/search", async (req, res) => {
   if (city && country && guest_capacity) {
     try {
       const results = await Property.query()
-        .select("properties.*", "locations.*", "images.name")
+        .select("properties.*", "locations.*", "images.name as image_name")
         .joinRelated("[locations, images]")
         .where("locations.city", city)
         .where("locations.country", country)
