@@ -31,7 +31,7 @@ const Header = props => {
           {isAuth ? (
             <>
               <li class="nav-item">
-                <a class="nav-link" href="/profie">
+                <a class="nav-link" href="/profile">
                   Profile
                 </a>
               </li>
