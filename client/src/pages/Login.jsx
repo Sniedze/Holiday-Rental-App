@@ -8,7 +8,7 @@ const Login = ({ setIsAuth }) => {
   const [password, setPassword] = useState(""); // "" = empty string
   const [error, setError] = useState("");
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     event.preventDefault();
     if (email && password) {
       axios({
@@ -17,14 +17,14 @@ const Login = ({ setIsAuth }) => {
         withCredentials: true,
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         data: {
           email,
-          password
-        }
+          password,
+        },
       })
-        .then(function(res) {
+        .then(function (res) {
           if (res.status === 200) {
             console.log(res);
             setIsAuth(true);
@@ -33,11 +33,13 @@ const Login = ({ setIsAuth }) => {
         .then(() => {
           history.replace("/profile");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
+          setIsAuth(false);
         });
     } else {
       setError("Invalid Data");
+      setIsAuth(false);
     }
   };
 
@@ -47,12 +49,12 @@ const Login = ({ setIsAuth }) => {
         <input
           type="email"
           required
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
         ></input>
         <input
           type="password"
           required
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
         ></input>
         <button onClick={handleClick}>LOGIN</button>
       </form>

@@ -61,18 +61,22 @@ router.get("/properties/search", async (req, res) => {
 });
 
 /////////////////////////Post a property
+const propertyFiles = uploadImages.fields([
+  { name: "mainImage", maxCount: 1 },
+  { name: "images", maxCount: 6 },
+]);
 router.post(
   "/properties/create",
   isAuthenticated,
-  uploadImages.fields([{ name: "mainImage", maxCount: 1 }]),
+  propertyFiles,
   async (req, res) => {
+    console.log(req.files);
     if (req.files.mainImage[0]) {
       const userId = req.session.user.id;
       const mainImage = {
         filename: req.files.mainImage[0].filename,
         size: req.files.mainImage[0].size,
       };
-
       const {
         title,
         type,
