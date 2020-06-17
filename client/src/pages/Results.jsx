@@ -45,7 +45,7 @@ const Results = (props) => {
                 <div className="col-md-6 col-sm-12">
                   <img
                     className="rounded shadow-lg"
-                    src={`http://localhost:9090/images/${result.name}`}
+                    src={`http://localhost:9090/images/${result.image_name}`}
                     alt=""
                   ></img>
                 </div>
