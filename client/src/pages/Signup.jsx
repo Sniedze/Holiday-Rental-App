@@ -53,8 +53,6 @@ const Signup = () => {
       ) : (
         <div className="container">
           <h1>Create the profile</h1>
-          <p>.............</p>
-
           <form method="POST">
             <input
               type="text"

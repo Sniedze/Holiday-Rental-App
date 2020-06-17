@@ -12,7 +12,7 @@ const Home = () => {
           <div class="col-sm-6 text-center">
             <h1>WELCOME TO HOLIDAY HOUSE</h1>
             <br></br>
-            <p>Plan the best vacation of your life in luxury home.</p>
+            <p>Plan the best vacation of your life in holiday homes.</p>
             <br></br>
             <hr />
             <br></br>
@@ -42,8 +42,8 @@ const Home = () => {
             ></img>
           </div>
           <div class="col-sm-6 text-center">
-            <h2>Something something</h2>
-            <p>uryfusirehsdehesuigh</p>
+            <h2>Search for the holiday house</h2>
+            <p>Enter destination city, country and number of guests</p>
             <br></br>
             <Search />;
           </div>
