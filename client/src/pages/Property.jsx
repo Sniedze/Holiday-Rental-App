@@ -18,7 +18,7 @@ const Property = (props) => {
 
   const getProperties = async (id) => {
     if (!id) {
-      history.replace("/profile");
+      //history.replace("/profile");
     }
     try {
       await axios({
