@@ -130,9 +130,8 @@ router.post(
         country,
       } = req.body;
 
+      let imageId = null;
       try {
-        let imageId = null;
-
         return await Image.query()
           .insert({ name: mainImage.filename, size: mainImage.size })
           .then((image) => {
