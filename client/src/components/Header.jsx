@@ -1,8 +1,9 @@
 import React from "react";
-//import { NavLink, Link } from "react-router-dom";
+import Popup from "reactjs-popup";
 import { logout } from "../functions/logout";
 import { useHistory } from "react-router-dom";
 import "../styling/css/Navbar.css";
+import Login from "../pages/Login";
 
 const Header = (props) => {
   const history = useHistory();
@@ -43,13 +44,27 @@ const Header = (props) => {
             </>
           ) : (
             <>
-              <li className="nav-item ">
-                <a className="nav-link" href="/login">
-                  Login
-                </a>
-              </li>
+              <Popup
+                contentStyle={{
+                  width: "500px",
+                  height: "300px",
+                  fontFamily: "Heiti SC",
+                  marginTop: "200px"
+                }}
+                trigger={
+                  <li className="nav-item">
+                    <a className="nav-link">Login</a>
+                  </li>
+                }
+                position="bottom-right"
+              >
+                <div>
+                  <Login />
+                </div>
+              </Popup>
+
               <li className="nav-item">
-                <a className="nav-link" href="/signup">
+                <a className="nav-link scroll-link" href="#register">
                   Register
                 </a>
               </li>

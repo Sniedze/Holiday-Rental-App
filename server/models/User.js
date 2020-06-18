@@ -15,11 +15,11 @@ class User extends Model {
           from: "users.id",
           through: {
             from: "user_properties.user_id",
-            to: "user_properties.property_id",
+            to: "user_properties.property_id"
           },
-          to: "properties.id",
-        },
-      },
+          to: "properties.id"
+        }
+      }
     };
   }
 }

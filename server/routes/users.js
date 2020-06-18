@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/User");
+const { isAuthenticated } = require("../helpers/auth_backend");
 
 //#############################################
 /*
@@ -24,6 +25,13 @@ router.get("/users/authenticated", async (req, res, next) => {
     next();
     ///console.log(error);
   }
+});
+
+router.get("/user", isAuthenticated, async (req, res, next) => {
+  const user = await User.query()
+    .select("first_name", "last_name", "email")
+    .findById(req.session.user.id);
+  res.json(user);
 });
 
 router.get("/users/logout", async (req, res) => {
@@ -110,6 +118,36 @@ router.post("/users/register", (req, res) => {
     }
   } else {
     return res.status(404).send({ response: "Missing fields" });
+  }
+});
+
+router.patch("/users/update", isAuthenticated, async (req, res, next) => {
+  const { id, email, password, firstName, lastName } = req.body;
+  try {
+    const user = await User.query()
+      .findById(id)
+      .throwIfNotFound();
+    await user.$query().patch({ email, password, firstName, lastName });
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/users/delete", isAuthenticated, async (req, res, next) => {
+  try {
+    const user = await User.query().deleteById(req.session.user.id);
+    if (user) {
+      res.json({
+        message: `User ${req.session.username} successfully deleted`
+      });
+    } else {
+      res.json({
+        message: `Error deleting the user`
+      });
+    }
+  } catch (err) {
+    next(err);
   }
 });
 

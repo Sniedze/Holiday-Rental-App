@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Results = (props) => {
+const Results = props => {
   const history = useHistory();
 
   const [results, setResults] = useState([]);
@@ -18,12 +18,26 @@ const Results = (props) => {
     getResults(city, country, guests);
   }, [history]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get("city");
+    const country = params.get("country");
+    const guests = params.get("guest_capacity");
+    console.log(!city);
+    if (!city || !country || !guests) {
+      history.replace("/");
+    }
+
+    getResults(city, country, guests);
+  }, [history]);
+
   const getResults = async (city, country, guests) => {
     try {
       let response = await axios.get(
         `http://localhost:9090/properties/search?city=${city}&country=${country}&guest_capacity=${guests}`
       );
       setResults(response.data.results);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +73,7 @@ const Results = (props) => {
                                   className="container"
                                   style={{
                                     backgroundColor: "rgb(50, 57, 65)",
-                                    color: "white",
+                                    color: "white"
                                   }}
                                 >
                                   <h5>{result.price}</h5>

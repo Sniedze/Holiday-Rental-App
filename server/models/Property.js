@@ -26,25 +26,25 @@ class Property extends Model {
         modelClass: Location,
         join: {
           from: "properties.location_id",
-          to: "locations.id",
-        },
+          to: "locations.id"
+        }
       },
       images: {
         relation: Model.HasManyRelation,
         modelClass: Image,
         join: {
           from: "properties.image_id",
-          to: "images.id",
-        },
+          to: "images.id"
+        }
       },
       rent: {
         relation: Model.HasManyRelation,
         modelClass: Rent,
         join: {
           from: "properties.rent_id",
-          to: "rent.id",
-        },
-      },
+          to: "rent.id"
+        }
+      }
     };
   }
 }

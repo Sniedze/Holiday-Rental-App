@@ -1,7 +1,11 @@
 import React from "react";
 
 const PropertyDetail = () => {
-  return <></>;
+  return (
+    <>
+      <h1>DETAIL</h1>
+    </>
+  );
 };
 
 export default PropertyDetail;

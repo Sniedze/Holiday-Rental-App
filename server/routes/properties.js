@@ -10,17 +10,17 @@ const Image = require("../models/Image");
 const UserProperties = require("../models/UserProperties");
 
 const imageStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function(req, file, cb) {
     cb(null, __dirname + "/../files/images"); // cb = part of multer, callback
   },
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     cb(
       null,
       crypto.randomBytes(16).toString("hex") +
         "." +
         mime.getExtension(file.mimetype)
     );
-  },
+  }
 });
 const uploadImages = multer({ storage: imageStorage });
 
@@ -79,7 +79,7 @@ router.get("/property/:id", async (req, res) => {
 /////////////////////////Post a property
 const propertyFiles = uploadImages.fields([
   { name: "mainImage", maxCount: 1 },
-  { name: "images", maxCount: 6 },
+  { name: "images", maxCount: 6 }
 ]);
 router.post(
   "/properties/create",
@@ -91,9 +91,9 @@ router.post(
       const images = [];
       const mainImage = {
         name: req.files.mainImage[0].filename,
-        size: req.files.mainImage[0].size,
+        size: req.files.mainImage[0].size
       };
-      req.files.images.forEach((img) => {
+      req.files.images.forEach(img => {
         images.push({ name: img.filename, size: img.size });
       });
       const {
@@ -108,7 +108,7 @@ router.post(
         street,
         postalCode,
         city,
-        country,
+        country
       } = req.body;
 
       try {
@@ -116,16 +116,16 @@ router.post(
 
         return await Image.query()
           .insert({ name: mainImage.filename, size: mainImage.size })
-          .then((image) => {
+          .then(image => {
             imageId = image.id;
             return Location.query().insert({
               street,
               postal_code: postalCode,
               city,
-              country,
+              country
             });
           })
-          .then((location) => {
+          .then(location => {
             return Property.query().insert({
               title,
               type,
@@ -136,23 +136,23 @@ router.post(
               size,
               price,
               location_id: location.id,
-              image_id: imageId,
+              image_id: imageId
             });
           })
-          .then((property) => {
+          .then(property => {
             return UserProperties.query().insert({
               property_id: property.id,
-              user_id: userId,
+              user_id: userId
             });
           })
           .then(
             res.status(200).send({
-              response: "Property added",
+              response: "Property added"
             })
           );
       } catch (error) {
         res.status(500).send({
-          response: "DB error",
+          response: "DB error"
         });
       }
     }
