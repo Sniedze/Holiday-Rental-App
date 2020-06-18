@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import "../styling/css/Navbar.css";
 import Login from "../pages/Login";
 
-const Header = props => {
+const Header = (props) => {
   const history = useHistory();
   const { isAuth, setIsAuth } = props;
 

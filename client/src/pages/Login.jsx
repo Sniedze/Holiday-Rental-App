@@ -35,9 +35,11 @@ const Login = ({ setIsAuth }) => {
         })
         .catch(function(error) {
           console.log(error);
+          setIsAuth(false);
         });
     } else {
       setError("Invalid Data");
+      setIsAuth(false);
     }
   };
 

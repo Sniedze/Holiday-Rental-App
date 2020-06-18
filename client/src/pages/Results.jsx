@@ -6,9 +6,17 @@ const Results = props => {
   const history = useHistory();
 
   const [results, setResults] = useState([]);
-  //const [city, setCity] = useState("");
-  //const [country, setCountry] = useState("");
-  //const [guests, setGuests] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get("city");
+    const country = params.get("country");
+    const guests = params.get("guest_capacity");
+    if (!city || !country || !guests) {
+      history.replace("/");
+    }
+    getResults(city, country, guests);
+  }, [history]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -44,52 +52,50 @@ const Results = props => {
             <div id="inam" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <div className="container">
-                    <div className="row">
-                      {results.map((result, index) => {
-                        return (
-                          <>
-                            <div
-                              className="col-sm-12 col-lg-4"
-                              key={"index-" + index}
-                            >
-                              <div className="card">
-                                <img
-                                  className="rounded shadow-lg"
-                                  style={{ maxWidth: "100%" }}
-                                  src={`http://localhost:9090/images/${result.name}`}
-                                  alt=""
-                                ></img>
-                                <div className="card-body">
-                                  <h3 className="card-title">{result.title}</h3>
-                                  <div
-                                    className="container"
-                                    style={{
-                                      backgroundColor: "rgb(50, 57, 65)",
-                                      color: "white"
-                                    }}
-                                  >
-                                    <h5>{result.price} €</h5>
-                                  </div>
-                                  <p
-                                    className="card-text"
-                                    style={{ color: "black" }}
-                                  >
-                                    {result.description}
-                                  </p>
-                                  <button
-                                    type="button"
-                                    className="btn btn-warning"
-                                  >
-                                    View More
-                                  </button>
+                  <div className="row">
+                    {results.map((result, index) => {
+                      return (
+                        <>
+                          <div
+                            className="col-sm-12 col-lg-4"
+                            key={"index-" + index}
+                          >
+                            <div className="card" style={{ width: "300px" }}>
+                              <img
+                                className="rounded shadow-lg"
+                                style={{ maxWidth: "100%" }}
+                                src={`http://localhost:9090/images/${result.name}`}
+                                alt=""
+                              ></img>
+                              <div className="card-body">
+                                <h3 className="card-title">{result.title}</h3>
+                                <div
+                                  className="container"
+                                  style={{
+                                    backgroundColor: "rgb(50, 57, 65)",
+                                    color: "white"
+                                  }}
+                                >
+                                  <h5>{result.price}</h5>
                                 </div>
+                                <p
+                                  className="card-text"
+                                  style={{ color: "black" }}
+                                >
+                                  {result.description}
+                                </p>
+                                <button
+                                  type="button"
+                                  className="btn btn-warning"
+                                >
+                                  View More
+                                </button>
                               </div>
                             </div>
-                          </>
-                        );
-                      })}
-                    </div>
+                          </div>
+                        </>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

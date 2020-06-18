@@ -9,6 +9,20 @@ const Profile = () => {
   const history = useHistory();
   const [properties, setProperties] = useState([]);
 
+  const getProperties = async () => {
+    try {
+      await axios({
+        method: "GET",
+        url: "http://localhost:9090/user/properties",
+        withCredentials: true
+      }).then(properties => {
+        const allProperties = properties.data.usersProperties;
+        setProperties(allProperties);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     const getProperties = async () => {
       try {
