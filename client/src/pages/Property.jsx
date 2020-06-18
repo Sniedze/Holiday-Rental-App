@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 
-const Property = props => {
+const Property = (props) => {
   const history = useHistory();
   const [data, setData] = useState([]);
 
@@ -16,7 +16,7 @@ const Property = props => {
     getProperties(id);
   }, [history]);
 
-  const getProperties = async id => {
+  const getProperties = async (id) => {
     if (!id) {
       history.replace("/profile");
     }
@@ -24,10 +24,10 @@ const Property = props => {
       await axios({
         method: "GET",
         url: `http://localhost:9090/property/${id}`,
-        withCredentials: true
-      }).then(data => {
+        withCredentials: true,
+      }).then((data) => {
         console.log(data);
-        const allProperties = data;
+        const allProperties = data.data.property;
         setData(allProperties);
         console.log(allProperties);
       });
@@ -37,38 +37,53 @@ const Property = props => {
   };
 
   return (
-    <h1>Property</h1>
-    // <div className="col-sm-12 col-lg-4" key={"index-" + data.id}>
-    //   <div className="card" style={{ width: "300px" }}>
-    //     <img
-    //       className="rounded shadow-lg"
-    //       style={{ maxWidth: "100%" }}
-    //       src={`http://localhost:9090/images/${data.images[0].name}`}
-    //       alt=""
-    //     ></img>
-    //     <div className="card-body">
-    //       <h3 className="card-title">{data.title}</h3>
-    //       <div
-    //         className="container"
-    //         style={{
-    //           backgroundColor: "rgb(50, 57, 65)",
-    //           color: "white",
-    //         }}
-    //       >
-    //         <h5>Price: {data.price} EUR</h5>
-    //       </div>
-    //       <p className="card-text" style={{ color: "black" }}>
-    //         {data.description}
-    //       </p>
-    //       <h5>Bedrooms: {data.bedrooms} EUR</h5>
-    //       <h5>Bathrooms: {data.bathrooms} EUR</h5>
-    //       <h5>Maximum number of guests: {data.guest_capacity} EUR</h5>
-    //       <button type="button" className="btn btn-warning">
-    //         View More
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>
+    <>
+      <h1 style={{ textAlign: "center" }}>{data.title} property</h1>
+      <div
+        className="col-sm-12 col-lg-4"
+        key={"index-" + data.id}
+        style={{ width: "500px", margin: "0 auto" }}
+      >
+        <div className="card">
+          <img
+            className="rounded shadow-lg"
+            style={{ maxWidth: "100%" }}
+            src={`http://localhost:9090/images/${data.name}`}
+            alt=""
+          ></img>
+          <div className="card-body">
+            <div
+              className="container"
+              style={{
+                backgroundColor: "rgb(50, 57, 65)",
+                color: "white",
+              }}
+            >
+              <h5>Price: {data.price} EUR</h5>
+            </div>
+            <p className="card-text" style={{ color: "black" }}>
+              {data.description}
+            </p>
+            <p style={{ color: "black", margin: "0" }}>
+              Bedrooms: {data.bedrooms} EUR
+            </p>
+            <p style={{ color: "black", margin: "0" }}>
+              Bathrooms: {data.bathrooms} EUR
+            </p>
+            <p style={{ color: "black", margin: "0" }}>
+              Maximum number of guests: {data.guest_capacity} EUR
+            </p>
+            <p style={{ color: "black", margin: "0" }}>
+              Address: {data.street}, {data.city}, {data.postal_code},{" "}
+              {data.country} EUR
+            </p>
+            <button type="button" className="btn btn-warning">
+              Edit{" "}
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
