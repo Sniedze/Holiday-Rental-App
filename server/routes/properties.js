@@ -114,7 +114,7 @@ router.post(
       let imageId = null;
 
       return await Image.query()
-        .insert({ name: mainImage.filename, size: mainImage.size })
+        .insert({ name: mainImage.name, size: mainImage.size })
         .then((image) => {
           imageId = image.id;
           return Location.query().insert({
