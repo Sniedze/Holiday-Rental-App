@@ -59,7 +59,7 @@ const Header = (props) => {
                 position="bottom-right"
               >
                 <div>
-                  <Login />
+                  <Login setIsAuth={setIsAuth} />
                 </div>
               </Popup>
 

@@ -127,18 +127,8 @@ const Profile = () => {
       </div>
       <h1>My Properties</h1>
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-4">
-            <div
-              className="container-3"
-              style={{ width: "500px", color: "white" }}
-            ></div>
-          </div>
-          <div className="col-md-4">
-            <NavLink to="/property/create">Add New Property</NavLink>
-          </div>
-        </div>
+      <div className="float-right">
+        <NavLink to="/property/create">Add New Property</NavLink>
       </div>
 
       <div className="container-fluid">
