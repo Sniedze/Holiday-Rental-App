@@ -20,8 +20,8 @@ const Profile = () => {
       await axios({
         method: "GET",
         url: "http://localhost:9090/user/properties",
-        withCredentials: true
-      }).then(properties => {
+        withCredentials: true,
+      }).then((properties) => {
         const allProperties = properties.data.usersProperties;
         setProperties(allProperties);
       });
@@ -33,7 +33,7 @@ const Profile = () => {
   const getUser = async () => {
     try {
       let response = await axios.get("http://localhost:9090/user", {
-        withCredentials: true
+        withCredentials: true,
       });
 
       setUser(response.data);
@@ -69,7 +69,7 @@ const Profile = () => {
           contentStyle={{
             width: "300px",
             height: "200px",
-            fontFamily: "Heiti SC"
+            fontFamily: "Heiti SC",
           }}
           trigger={
             <div className="mt-5">
@@ -77,7 +77,7 @@ const Profile = () => {
                 style={{
                   width: 50,
                   height: 50,
-                  color: "rgb(174, 134, 37)"
+                  color: "rgb(174, 134, 37)",
                 }}
               />
             </div>
@@ -90,7 +90,7 @@ const Profile = () => {
                 {user.email}
               </h4>
               {informations &&
-                informations.map(information => <p>{information.data}</p>)}
+                informations.map((information) => <p>{information.data}</p>)}
             </div>
             <div className="mt-3 ml-3">
               <a href="/home" style={{ color: "rgb(199, 122, 6" }}>
@@ -131,7 +131,7 @@ const Profile = () => {
                             <NavLink
                               to={{
                                 pathname: "/property",
-                                search: `?id=${property.id}`
+                                search: `?id=${property.id}`,
                               }}
                             >
                               <div
@@ -153,7 +153,7 @@ const Profile = () => {
                                       className="card-title"
                                       style={{
                                         fontFamily: "lavigne-text, sans-serif",
-                                        fontSize: "25px"
+                                        fontSize: "25px",
                                       }}
                                     >
                                       {property.title}
@@ -162,7 +162,7 @@ const Profile = () => {
                                       className="container"
                                       style={{
                                         backgroundColor: "rgb(50, 57, 65)",
-                                        color: "white"
+                                        color: "white",
                                       }}
                                     >
                                       <h5>{property.price} €</h5>
@@ -189,7 +189,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      ); })} );
     </>
   );
 };
