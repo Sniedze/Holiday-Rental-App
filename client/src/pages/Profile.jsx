@@ -3,11 +3,16 @@ import { NavLink, useHistory } from "react-router-dom";
 import { FaUserCog } from "react-icons/fa";
 import Popup from "reactjs-popup";
 import axios from "axios";
-import Results from "./Results";
 
 const Profile = () => {
   const history = useHistory();
+  const [user, setUser] = useState("");
   const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    getUser();
+    getProperties();
+  }, []);
 
   const getProperties = async () => {
     try {
@@ -23,41 +28,18 @@ const Profile = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    const getProperties = async () => {
-      try {
-        await axios({
-          method: "GET",
-          url: "http://localhost:9090/user/properties",
-          withCredentials: true,
-        }).then((properties) => {
-          const allProperties = properties.data.usersProperties;
-          setProperties(allProperties);
-          console.log(allProperties);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getProperties();
-  }, []);
 
-  const [user, setUser] = useState("");
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        let response = await axios.get("http://localhost:9090/user", {
-          withCredentials: true,
-        });
+  const getUser = async () => {
+    try {
+      let response = await axios.get("http://localhost:9090/user", {
+        withCredentials: true,
+      });
 
-        console.log(response.data);
-        setUser(response.data);
-      } catch (error) {
-        console.log(error.data);
-      }
-    };
-    getUser();
-  }, []);
+      setUser(response.data);
+    } catch (error) {
+      console.log(error.data);
+    }
+  };
 
   const { informations } = user;
   console.log(informations);

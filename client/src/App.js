@@ -49,6 +49,7 @@ function App() {
             component={(props) => <AddProperty />}
           ></PrivateRoute>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

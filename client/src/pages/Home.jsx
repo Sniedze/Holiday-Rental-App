@@ -2,7 +2,6 @@ import React from "react";
 import Search from "../components/Search";
 import "../styling/css/Home.css";
 import { FaAngleDown } from "react-icons/fa";
-import Footer from "../components/Footer";
 import Signup from "./Signup";
 
 const Home = () => {
@@ -71,7 +70,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
