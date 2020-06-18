@@ -37,11 +37,13 @@ function App() {
             component={props => <Profile />}
           ></PrivateRoute>
           <PrivateRoute
+            exact
             path="/property"
             isAuth={isAuth}
             component={props => <Property {...props} />}
           />
           <PrivateRoute
+            exact
             path="/property/create"
             isAuth={isAuth}
             component={props => <AddProperty />}
