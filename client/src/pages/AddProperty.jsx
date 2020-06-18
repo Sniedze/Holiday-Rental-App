@@ -18,6 +18,7 @@ const AddProperty = () => {
   const [mainImage, setMainImage] = useState(null);
   const [guestCapacity, setGuestCapacity] = useState("");
   const [message, setMessage] = useState("");
+
   const handleImagesUpload = async (files) => {
     for (let i = 0; i < files.length; i++) {
       multipleImages.push(files[i]);

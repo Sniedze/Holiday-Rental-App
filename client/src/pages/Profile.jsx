@@ -14,7 +14,6 @@ const Profile = () => {
       }).then((properties) => {
         const allProperties = properties.data.usersProperties;
         setProperties(allProperties);
-        console.log(allProperties);
       });
     } catch (error) {
       console.log(error);
