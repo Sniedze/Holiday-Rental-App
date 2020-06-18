@@ -118,14 +118,15 @@ const Profile = () => {
         <div className="row">
           <h5 className="ml-3">
             <a href="property/create" style={{ size: "50px", color: "white" }}>
-              Add New Property <MdAddBox />
+              <MdAddBox />
+              Add New Property
             </a>
           </h5>
           <div className="col-sm-12">
             <div id="inam" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <div class="container">
+                  <div class="container-fluid" style={{ paddingLeft: "200px" }}>
                     <div className="row">
                       {properties.map((property, index) => {
                         return (

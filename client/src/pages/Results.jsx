@@ -69,7 +69,15 @@ const Results = props => {
                                   alt=""
                                 ></img>
                                 <div className="card-body">
-                                  <h3 className="card-title">{result.title}</h3>
+                                  <h3
+                                    className="card-title"
+                                    style={{
+                                      fontFamily: "lavigne-text, sans-serif",
+                                      fontSize: "25px"
+                                    }}
+                                  >
+                                    {result.title}
+                                  </h3>
                                   <div
                                     className="container"
                                     style={{

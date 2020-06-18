@@ -6,6 +6,7 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { FaKey } from "react-icons/fa";
 import Footer from "../components/Footer";
 import { FaAngleDown } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import Signup from "./Signup";
 
 const Home = () => {
@@ -89,18 +90,17 @@ const Home = () => {
         </div>
       </div>
 
-      <div class="offers-container section-container" id="offers">
-        <div class="container">
-          <div class="row"></div>
-          <div class="row">
-            <div class="col-md-4 offers-box">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="offers-box-icon">
+      <div className="offers-container section-container" id="offers">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4 offers-box">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="offers-box-icon">
                     <IoMdPaper />
                   </div>
                 </div>
-                <div class="col-md-8">
+                <div className="col-md-8">
                   <h3>Plan Holiday</h3>
                   <hr />
                   <p>
@@ -112,14 +112,14 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4 offers-box wow fadeInDown">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="offers-box-icon">
+            <div className="col-md-4 offers-box">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="offers-box-icon">
                     <FaKey />
                   </div>
                 </div>
-                <div class="col-md-8">
+                <div className="col-md-8">
                   <h3>Rent Dream House</h3>
                   <hr />
                   <p>
@@ -131,14 +131,14 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4 offers-box ">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="offers-box-icon">
+            <div className="col-md-4 offers-box ">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="offers-box-icon">
                     <FaCommentsDollar />
                   </div>
                 </div>
-                <div class="col-md-8">
+                <div className="col-md-8">
                   <h3>Get Support</h3>
                   <hr />
                   <p>

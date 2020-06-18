@@ -82,7 +82,12 @@ const AddProperty = () => {
       <h1 className="text-center mt-5">Add Property</h1>
       <div
         className="container-fluid mt-5 "
-        style={{ backgroundColor: "white" }}
+        style={{
+          backgroundColor: "white",
+          width: "700px",
+          borderRadius: "10px",
+          opacity: "80%"
+        }}
       >
         <form encType="multipart/form-data">
           <div className="row mt-5">
