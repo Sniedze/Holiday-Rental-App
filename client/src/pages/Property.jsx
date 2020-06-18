@@ -5,31 +5,29 @@ import { useHistory, useParams } from "react-router-dom";
 const Property = (props) => {
   const history = useHistory();
   const [data, setData] = useState([]);
-
-  console.log(props);
+  const [location, setLocation] = useState([]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
-    console.log(id);
     getProperties(id);
   }, [history]);
 
   const getProperties = async (id) => {
     if (!id) {
-      //history.replace("/profile");
+      history.replace("/profile");
     }
     try {
       await axios({
         method: "GET",
-        url: `http://localhost:9090/property/${id}`,
+        url: `http://localhost:9090/user/property/${id}`,
         withCredentials: true,
       }).then((data) => {
-        console.log(data);
-        const allProperties = data.data.property;
+        const allProperties = data.data.property[0];
         setData(allProperties);
         console.log(allProperties);
+        setLocation(data.locations);
       });
     } catch (error) {
       console.log(error);
@@ -65,17 +63,17 @@ const Property = (props) => {
               {data.description}
             </p>
             <p style={{ color: "black", margin: "0" }}>
-              Bedrooms: {data.bedrooms} EUR
+              Bedrooms: {data.bedrooms}
             </p>
             <p style={{ color: "black", margin: "0" }}>
-              Bathrooms: {data.bathrooms} EUR
+              Bathrooms: {data.bathrooms}
             </p>
             <p style={{ color: "black", margin: "0" }}>
-              Maximum number of guests: {data.guest_capacity} EUR
+              Maximum number of guests: {data.guest_capacity}
             </p>
             <p style={{ color: "black", margin: "0" }}>
               Address: {data.street}, {data.city}, {data.postal_code},{" "}
-              {data.country} EUR
+              {data.country}
             </p>
             <button type="button" className="btn btn-warning">
               Edit{" "}
