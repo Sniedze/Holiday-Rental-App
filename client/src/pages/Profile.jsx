@@ -180,7 +180,6 @@ const Profile = () => {
                           </>
                         );
                       })}
-                      );
                     </div>
                   </div>
                 </div>
@@ -189,7 +188,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      ); })} );
     </>
   );
 };

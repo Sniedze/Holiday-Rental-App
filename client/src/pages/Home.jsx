@@ -6,7 +6,6 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { FaKey } from "react-icons/fa";
 import Footer from "../components/Footer";
 import { FaAngleDown } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
 import Signup from "./Signup";
 
 const Home = () => {
@@ -42,14 +41,18 @@ const Home = () => {
       <br></br>
       <br></br>
       <br></br>
-      <div class="contact-container section-container">
-        <div class="container">
-          <div class="row">
-            <div class="col contact section-description text-center">
+      <div className="contact-container section-container">
+        <div className="container">
+          <div className="row">
+            <div className="col contact section-description text-center">
               <h2>NEED MORE INFO ? </h2>
               <p>Contact us and we will help you!</p>
-              <div class="section-bottom-button mt-5">
-                <a class="btn btn-dark btn-link-5 " href="#" target="_blank">
+              <div className="section-bottom-button mt-5">
+                <a
+                  className="btn btn-dark btn-link-5 "
+                  href="#"
+                  target="_blank"
+                >
                   Contact
                 </a>
               </div>
@@ -153,6 +156,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

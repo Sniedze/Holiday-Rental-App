@@ -52,7 +52,7 @@ const Results = props => {
             <div id="inam" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <div class="container">
+                  <div className="container">
                     <div className="row">
                       {results.map((result, index) => {
                         return (

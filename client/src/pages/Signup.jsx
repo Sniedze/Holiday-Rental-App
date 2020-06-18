@@ -34,7 +34,7 @@ const Signup = () => {
         })
         .then(function(response) {
           setSignUp(true); // changing hook state
-          history.push("/login");
+          history.push("/");
         })
         .catch(function(error) {
           if (error.response.status === 400) {

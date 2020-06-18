@@ -80,6 +80,7 @@ const AddProperty = () => {
   return (
     <>
       <h1 className="text-center mt-5">Add Property</h1>
+      <h2 classname="text-center mt-5">{message}</h2>
       <div
         className="container-fluid mt-5 "
         style={{
@@ -259,7 +260,6 @@ const AddProperty = () => {
             ADD
           </button>
         </form>
-        <h2>{message}</h2>
       </div>
     </>
   );
