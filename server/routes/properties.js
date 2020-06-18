@@ -113,7 +113,7 @@ router.post(
         size: req.files.mainImage[0].size,
       };
       req.files.images.forEach((img) => {
-        images.push({ name: img.filename, size: img.size });
+        images.push({ name: mainImage.name, size: mainImage.size });
       });
       const {
         title,
@@ -131,48 +131,47 @@ router.post(
       } = req.body;
 
       let imageId = null;
-      try {
-        return await Image.query()
-          .insert({ name: mainImage.filename, size: mainImage.size })
-          .then((image) => {
-            imageId = image.id;
-            return Location.query().insert({
-              street,
-              postal_code: postalCode,
-              city,
-              country,
-            });
+
+      return await Image.query()
+        .insert({ name: mainImage.name, size: mainImage.size })
+        .then((image) => {
+          imageId = image.id;
+          return Location.query().insert({
+            street,
+            postal_code: postalCode,
+            city,
+            country,
+          });
+        })
+        .then((location) => {
+          return Property.query().insert({
+            title,
+            type,
+            description,
+            bedrooms,
+            guest_capacity: guestCapacity,
+            bathrooms,
+            size,
+            price,
+            location_id: location.id,
+            image_id: imageId,
+          });
+        })
+        .then((property) => {
+          return UserProperties.query().insert({
+            property_id: property.id,
+            user_id: userId,
+          });
+        })
+        .then(
+          res.status(200).send({
+            response: "Property added",
           })
-          .then((location) => {
-            return Property.query().insert({
-              title,
-              type,
-              description,
-              bedrooms,
-              guest_capacity: guestCapacity,
-              bathrooms,
-              size,
-              price,
-              location_id: location.id,
-              image_id: imageId,
-            });
-          })
-          .then((property) => {
-            return UserProperties.query().insert({
-              property_id: property.id,
-              user_id: userId,
-            });
-          })
-          .then(
-            res.status(200).send({
-              response: "Property added",
-            })
-          );
-      } catch (error) {
-        res.status(500).send({
-          response: "DB error",
-        });
-      }
+        );
+
+      res.status(500).send({
+        response: "DB error",
+      });
     }
   }
 );
