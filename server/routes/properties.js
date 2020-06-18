@@ -55,7 +55,6 @@ router.get("/properties/search", async (req, res) => {
         .where("locations.city", city)
         .where("locations.country", country)
         .where("properties.guest_capacity", ">=", guest_capacity);
-      console.log(results);
       return res.status(200).send({ results });
     } catch (error) {
       console.log(error);
@@ -71,7 +70,6 @@ router.get("/property/:id", async (req, res) => {
       .findById(id)
       .select("properties.*", "locations.*", "images.name")
       .joinRelated("[locations, images]");
-    console.log(property);
     return res.status(200).send({ property });
   } catch (error) {
     console.log(error);
