@@ -8,17 +8,17 @@ html {
 
 h1 {
   color: whitesmoke;
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
 }
 
 h2 {
   color: whitesmoke;
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
 }
 
 p {
   color: whitesmoke;
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
 }
 
 .container-fluid {
@@ -30,9 +30,127 @@ hr {
   border-top: 3px solid rgb(174, 134, 37);
 }
 .container-1 {
-  padding-top: 25%;
+  padding-top: 15%;
 }
 
 .img-thumbnail {
   border: 35px solid white;
+}
+
+.contact-container h2 {
+  color: rgb(174, 134, 37);
+  padding-top: 30px;
+  font-size: 40px;
+}
+.contact-container p {
+  color: rgb(50, 57, 65);
+  padding-top: 30px;
+}
+
+.contact-container {
+  background-color: white;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.btn-link-5 {
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  margin: 0 5px;
+  padding: 0 35px;
+  background: transparent;
+  border: 2px solid rgb(174, 134, 37);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 48px;
+  color: rgb(174, 134, 37);
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.btn-link-5:hover,
+.btn-link-5:focus,
+.btn-link-5:active,
+.btn-link-5:active:focus,
+.btn-link-5.btn-primary:not(:disabled):not(.disabled):active,
+.btn-link-5.btn-primary:not(:disabled):not(.disabled):active:focus {
+  padding: 0 10px;
+  background: rgb(174, 134, 37);
+  border: 0;
+  outline: 0;
+  color: #fff;
+  box-shadow: none;
+}
+
+.offers-container h3 {
+  color: rgb(174, 134, 37);
+  font-family: lavigne-text, sans-serif;
+  font-size: 24px;
+}
+.offers-container p {
+  color: rgb(50, 57, 65);
+  font-family: lavigne-text, sans-serif;
+  font-size: 20px;
+}
+
+.offers-container {
+  background-color: #fff;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.offers-box {
+  padding-top: 30px;
+  text-align: left;
+}
+
+.offers-box .offers-box-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  font-size: 40px;
+  color: #fff;
+  line-height: 80px;
+  text-align: center;
+  border-radius: 5px;
+
+  background: rgb(174, 134, 37); /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    rgb(174, 134, 37) 0%,
+    rgb(192, 173, 129) 100%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, rgb(174, 134, 37)),
+    color-stop(100%, rgb(192, 173, 129))
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    top,
+    rgb(174, 134, 37) 0%,
+    rgb(192, 173, 129) 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    top,
+    rgb(174, 134, 37) 0%,
+    rgb(192, 173, 129) 100%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(
+    top,
+    rgb(174, 134, 37) 0%,
+    rgb(192, 173, 129) 100%
+  ); /* IE10+ */
+  background: linear-gradient(
+    to bottom,
+    rgb(174, 134, 37) 0%,
+    rgb(192, 173, 129) 100%
+  ); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(174, 134, 37);', endColorstr='rgb(192, 173, 129) ',GradientType=0 ); /* IE6-9 */
+}
+
+.offers-box h3 {
+  margin-top: 0;
+  padding: 0 0 10px 0;
 }

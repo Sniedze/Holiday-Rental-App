@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import "../styling/css/Navbar.css";
 import Login from "../pages/Login";
 
-const Header = (props) => {
+const Header = props => {
   const history = useHistory();
   const { isAuth, setIsAuth } = props;
 
@@ -46,10 +46,13 @@ const Header = (props) => {
             <>
               <Popup
                 contentStyle={{
-                  width: "500px",
+                  width: "300px",
                   height: "300px",
                   fontFamily: "Heiti SC",
-                  marginTop: "200px"
+                  marginTop: "200px",
+                  backgroundColor: "rgb(50, 57, 65)",
+                  borderRadius: "10px",
+                  borderColor: "rgb(174, 134, 37)"
                 }}
                 trigger={
                   <li className="nav-item">

@@ -1,5 +1,6 @@
 import React from "react";
 import "../styling/css/Footer.css";
+import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (

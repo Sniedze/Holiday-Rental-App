@@ -3,10 +3,11 @@
   background-color: rgb(50, 57, 65);
 }
 p {
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
 }
 
 h3 {
-  font-family: Bickham Script Pro 3;
+  font-family: bickham-script-pro-3, sans-serif;
   color: rgb(174, 134, 37);
+  font-size: 50px;
 }

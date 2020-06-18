@@ -1,5 +1,5 @@
 input {
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -7,11 +7,11 @@ input {
   background-color: transparent;
   border: none;
   border-bottom: 3px solid white;
-  color: white;
+  color: rgb(174, 134, 37);
 }
 
 ::-webkit-input-placeholder {
-  color: white;
+  color: rgb(174, 134, 37);
 }
 
 input[type="text"] {
@@ -24,7 +24,7 @@ input[type="text"]:focus {
 
 label {
   color: rgb(174, 134, 37);
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
 }
 
 .btn-dark {

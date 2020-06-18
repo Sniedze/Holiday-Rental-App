@@ -45,57 +45,59 @@ const Results = props => {
 
   return (
     <>
-      <h1>Holiday Houses</h1>
+      <h1 className="text-center mt-5">Holiday Houses</h1>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-12">
             <div id="inam" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <div className="row">
-                    {results.map((result, index) => {
-                      return (
-                        <>
-                          <div
-                            className="col-sm-12 col-lg-4"
-                            key={"index-" + index}
-                          >
-                            <div className="card" style={{ width: "300px" }}>
-                              <img
-                                className="rounded shadow-lg"
-                                style={{ maxWidth: "100%" }}
-                                src={`http://localhost:9090/images/${result.name}`}
-                                alt=""
-                              ></img>
-                              <div className="card-body">
-                                <h3 className="card-title">{result.title}</h3>
-                                <div
-                                  className="container"
-                                  style={{
-                                    backgroundColor: "rgb(50, 57, 65)",
-                                    color: "white"
-                                  }}
-                                >
-                                  <h5>{result.price}</h5>
+                  <div class="container">
+                    <div className="row">
+                      {results.map((result, index) => {
+                        return (
+                          <>
+                            <div
+                              className="col-sm-12 col-lg-4 mt-5"
+                              key={"index-" + index}
+                            >
+                              <div className="card" style={{ width: "300px" }}>
+                                <img
+                                  className="rounded shadow-lg"
+                                  style={{ maxWidth: "100%" }}
+                                  src={`http://localhost:9090/images/${result.name}`}
+                                  alt=""
+                                ></img>
+                                <div className="card-body">
+                                  <h3 className="card-title">{result.title}</h3>
+                                  <div
+                                    className="container"
+                                    style={{
+                                      backgroundColor: "rgb(50, 57, 65)",
+                                      color: "white"
+                                    }}
+                                  >
+                                    <h5>{result.price} €</h5>
+                                  </div>
+                                  <p
+                                    className="card-text"
+                                    style={{ color: "black" }}
+                                  >
+                                    {result.description}
+                                  </p>
+                                  <button
+                                    type="button"
+                                    className="btn btn-warning"
+                                  >
+                                    View More
+                                  </button>
                                 </div>
-                                <p
-                                  className="card-text"
-                                  style={{ color: "black" }}
-                                >
-                                  {result.description}
-                                </p>
-                                <button
-                                  type="button"
-                                  className="btn btn-warning"
-                                >
-                                  View More
-                                </button>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      );
-                    })}
+                          </>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>

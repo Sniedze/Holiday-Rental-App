@@ -55,7 +55,6 @@ router.get("/properties/search", async (req, res) => {
         .where("locations.city", city)
         .where("locations.country", country)
         .where("properties.guest_capacity", ">=", guest_capacity);
-      console.log(results);
       return res.status(200).send({ results });
     } catch (error) {
       console.log(error);
@@ -66,12 +65,30 @@ router.get("/properties/search", async (req, res) => {
 
 router.get("/property/:id", async (req, res) => {
   const { id } = req.params;
+
   try {
     const property = await Property.query()
       .findById(id)
       .select("properties.*", "locations.*", "images.name")
       .joinRelated("[locations, images]");
-    console.log(property);
+    return res.status(200).send({ property });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/user/property/:id", isAuthenticated, async (req, res) => {
+  const { id } = req.params;
+  const userId = req.session.user.id;
+  const user = await User.query().findById(userId);
+
+  try {
+    const property = await user
+      .$relatedQuery("properties")
+      .select("properties.*", "locations.*", "images.name")
+      .joinRelated("[locations, images]")
+      .where("properties.id", id);
+
     return res.status(200).send({ property });
   } catch (error) {
     console.log(error);
@@ -96,7 +113,7 @@ router.post(
         size: req.files.mainImage[0].size
       };
       req.files.images.forEach(img => {
-        images.push({ name: img.filename, size: img.size });
+        images.push({ name: mainImage.name, size: mainImage.size });
       });
       const {
         title,
@@ -113,50 +130,48 @@ router.post(
         country
       } = req.body;
 
-      try {
-        let imageId = null;
+      let imageId = null;
 
-        return await Image.query()
-          .insert({ name: mainImage.filename, size: mainImage.size })
-          .then(image => {
-            imageId = image.id;
-            return Location.query().insert({
-              street,
-              postal_code: postalCode,
-              city,
-              country
-            });
+      return await Image.query()
+        .insert({ name: mainImage.name, size: mainImage.size })
+        .then(image => {
+          imageId = image.id;
+          return Location.query().insert({
+            street,
+            postal_code: postalCode,
+            city,
+            country
+          });
+        })
+        .then(location => {
+          return Property.query().insert({
+            title,
+            type,
+            description,
+            bedrooms,
+            guest_capacity: guestCapacity,
+            bathrooms,
+            size,
+            price,
+            location_id: location.id,
+            image_id: imageId
+          });
+        })
+        .then(property => {
+          return UserProperties.query().insert({
+            property_id: property.id,
+            user_id: userId
+          });
+        })
+        .then(
+          res.status(200).send({
+            response: "Property added"
           })
-          .then(location => {
-            return Property.query().insert({
-              title,
-              type,
-              description,
-              bedrooms,
-              guest_capacity: guestCapacity,
-              bathrooms,
-              size,
-              price,
-              location_id: location.id,
-              image_id: imageId
-            });
-          })
-          .then(property => {
-            return UserProperties.query().insert({
-              property_id: property.id,
-              user_id: userId
-            });
-          })
-          .then(
-            res.status(200).send({
-              response: "Property added"
-            })
-          );
-      } catch (error) {
-        res.status(500).send({
-          response: "DB error"
-        });
-      }
+        );
+
+      res.status(500).send({
+        response: "DB error"
+      });
     }
   }
 );

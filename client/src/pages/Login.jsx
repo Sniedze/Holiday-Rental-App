@@ -47,18 +47,35 @@ const Login = ({ setIsAuth }) => {
     <div className="container">
       <form method="POST">
         <input
+          className="mt-5"
           type="email"
+          placeholder="Email"
           required
           onChange={event => setEmail(event.target.value)}
-          style={{ color: "black" }}
+          style={{
+            color: "black",
+            backgroundColor: "white",
+            width: "250px",
+            borderRadius: "5px"
+          }}
         ></input>
+        <br />
         <input
           type="password"
+          placeholder="Password"
           required
           onChange={event => setPassword(event.target.value)}
-          style={{ color: "black" }}
+          style={{
+            color: "black",
+            backgroundColor: "white",
+            width: "250px",
+            borderRadius: "5px"
+          }}
         ></input>
-        <button onClick={handleClick}>LOGIN</button>
+        <br />
+        <button onClick={handleClick} className="btn btn-dark mt-5">
+          LOGIN
+        </button>
       </form>
       <h2>{error}</h2>
     </div>

@@ -2,27 +2,13 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { FaUserCog } from "react-icons/fa";
 import Popup from "reactjs-popup";
+import { MdAddBox } from "react-icons/md";
 import axios from "axios";
-import Results from "./Results";
 
 const Profile = () => {
   const history = useHistory();
   const [properties, setProperties] = useState([]);
 
-  const getProperties = async () => {
-    try {
-      await axios({
-        method: "GET",
-        url: "http://localhost:9090/user/properties",
-        withCredentials: true
-      }).then(properties => {
-        const allProperties = properties.data.usersProperties;
-        setProperties(allProperties);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     const getProperties = async () => {
       try {
@@ -78,7 +64,10 @@ const Profile = () => {
 
   return (
     <>
-      <div className="float-right mr-5 mt-5">
+      <h1 className="text-center mt-5">
+        {user.first_name} {user.last_name}'s properties
+      </h1>
+      <div className="float-right mr-5">
         <Popup
           contentStyle={{
             width: "300px",
@@ -86,7 +75,7 @@ const Profile = () => {
             fontFamily: "Heiti SC"
           }}
           trigger={
-            <div>
+            <div className="mt-5">
               <FaUserCog
                 style={{
                   width: 50,
@@ -125,45 +114,84 @@ const Profile = () => {
           </div>
         </Popup>
       </div>
-      <h1>My Properties</h1>
-
-      <div className="float-right">
-        <NavLink to="/property/create">Add New Property</NavLink>
-      </div>
-
       <div className="container-fluid">
-        {properties.map((property, index) => {
-          return (
-            <>
-              <NavLink
-                to={{
-                  pathname: `/property/${property.id}`,
-                  state: { data: property }
-                }}
-              >
-                <div className="container-fluid">
-                  <div className="row" key={"index-" + index}>
-                    <div className="col-md-4">
-                      <img
-                        className="rounded shadow-lg"
-                        src={`http://localhost:9090/images/${property.images[0].name}`}
-                        alt=""
-                        style={{ width: "500px" }}
-                      ></img>
-                    </div>
-                    <div className="col-md-4">
-                      <h1>{property.title}</h1>
-                      <p>{property.price} €</p>
-                      <p>{property.description}</p>
+        <div className="row">
+          <h5 className="ml-3">
+            <a href="property/create" style={{ size: "50px", color: "white" }}>
+              Add New Property <MdAddBox />
+            </a>
+          </h5>
+          <div className="col-sm-12">
+            <div id="inam" className="carousel slide" data-ride="carousel">
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <div class="container">
+                    <div className="row">
+                      {properties.map((property, index) => {
+                        return (
+                          <>
+                            <NavLink
+                              to={{
+                                pathname: "/property",
+                                search: `?id=${property.id}`
+                              }}
+                            >
+                              <div
+                                className="col-sm-12 col-lg-4 mt-5"
+                                key={"index-" + index}
+                              >
+                                <div
+                                  className="card"
+                                  style={{ width: "300px" }}
+                                >
+                                  <img
+                                    className="rounded shadow-lg"
+                                    style={{ maxWidth: "100%" }}
+                                    src={`http://localhost:9090/images/${property.images[0].name}`}
+                                    alt=""
+                                  ></img>
+                                  <div className="card-body">
+                                    <h3
+                                      className="card-title"
+                                      style={{
+                                        fontFamily: "lavigne-text, sans-serif",
+                                        fontSize: "25px"
+                                      }}
+                                    >
+                                      {property.title}
+                                    </h3>
+                                    <div
+                                      className="container"
+                                      style={{
+                                        backgroundColor: "rgb(50, 57, 65)",
+                                        color: "white"
+                                      }}
+                                    >
+                                      <h5>{property.price} €</h5>
+                                    </div>
+                                    <p
+                                      className="card-text"
+                                      style={{ color: "black" }}
+                                    >
+                                      {property.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </NavLink>
+                          </>
+                        );
+                      })}
+                      );
                     </div>
                   </div>
                 </div>
-              </NavLink>
-            </>
-          );
-        })}
-        ); })}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      ); })} );
     </>
   );
 };

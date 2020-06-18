@@ -6,7 +6,7 @@
   line-height: 1.42857143 !important;
   letter-spacing: 4px;
   border-radius: 0;
-  font-family: Heiti SC;
+  font-family: lavigne-text, sans-serif;
 }
 .navbar li a {
   color: #fff !important;
