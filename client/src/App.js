@@ -37,9 +37,9 @@ function App() {
             component={(props) => <Profile />}
           ></PrivateRoute>
           <PrivateRoute
-            path="/property/:id"
+            path="/property"
             isAuth={isAuth}
-            component={(props) => <Property />}
+            component={(props) => <Property {...props} />}
           />
           <PrivateRoute
             path="/property/create"

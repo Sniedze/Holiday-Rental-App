@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import Property from "./Property";
 
 const Profile = () => {
   const [properties, setProperties] = useState([]);
@@ -39,15 +38,13 @@ const Profile = () => {
                     {properties.map((property, index) => {
                       return (
                         <NavLink
+                          key={"index-" + index}
                           to={{
-                            pathname: `/property/${property.id}`,
-                            state: { data: property },
+                            pathname: "/property",
+                            search: `?id=${property.id}`,
                           }}
                         >
-                          <div
-                            className="col-sm-12 col-lg-4"
-                            key={"index-" + index}
-                          >
+                          <div className="col-sm-12 col-lg-4">
                             <div className="card" style={{ width: "300px" }}>
                               <img
                                 className="rounded shadow-lg"

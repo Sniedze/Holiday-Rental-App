@@ -12,7 +12,6 @@ const Results = (props) => {
     const city = params.get("city");
     const country = params.get("country");
     const guests = params.get("guest_capacity");
-    console.log(!city);
     if (!city || !country || !guests) {
       history.replace("/");
     }
