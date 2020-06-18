@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../styling/css/Search.css";
+import { BsSearch } from "react-icons/bs";
 
 const Search = () => {
   const history = useHistory();
@@ -45,7 +46,10 @@ const Search = () => {
         ></input>
       </div>
 
-      <button className="btn btn-dark">Search</button>
+      <button className="btn btn-dark">
+        <BsSearch />
+        Search
+      </button>
     </form>
   );
 };

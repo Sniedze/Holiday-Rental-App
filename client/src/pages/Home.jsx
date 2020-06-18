@@ -36,7 +36,7 @@ const Home = () => {
       <br></br>
       <br></br>
       <br></br>
-      <div className="container-fluid">
+      <div className="container-fluid" id="register">
         <div className="row">
           <div className="col-sm-6">
             <img
@@ -49,8 +49,10 @@ const Home = () => {
             <h2>Become an owner of the property</h2>
             <p>Rent and manage your properties by signing up</p>
             <br></br>
+            <hr></hr>
             <br></br>
-            <div className="register" id="register">
+            <br></br>
+            <div className="register">
               <Signup />
             </div>
           </div>

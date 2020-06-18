@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -10,13 +11,14 @@ import Results from "./pages/Results";
 import PrivateRoute from "./components/PrivateRoute";
 import { authenticate } from "./functions/auth";
 import AddProperty from "./pages/AddProperty";
-import PropertyDetail from "./pages/PropertyDetail";
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
+
   useEffect(() => {
     authenticate(setIsAuth); // calling the function and changing the state
   }, []); // [ ] = list of dependencies
+
   return (
     <Router>
       <div className="App">
@@ -25,11 +27,6 @@ function App() {
           <Route exact path="/" component={props => <Home />}></Route>
           <Route path="/signup" component={props => <Signup />}></Route>
           <Route path="/results" component={props => <Results />}></Route>
-          <Route
-            path="/details"
-            component={props => <PropertyDetail />}
-          ></Route>
-
           <Route
             path="/login"
             component={props => <Login setIsAuth={setIsAuth} />}
@@ -40,7 +37,8 @@ function App() {
             component={props => <Profile />}
           ></PrivateRoute>
           <PrivateRoute
-            path="/property/:id"
+            path="/property"
+            isAuth={isAuth}
             component={props => <Property {...props} />}
           />
           <PrivateRoute

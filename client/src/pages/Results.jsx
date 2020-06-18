@@ -44,7 +44,7 @@ const Results = props => {
             <div id="inam" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <div className="container-fluid">
+                  <div className="container">
                     <div className="row">
                       {results.map((result, index) => {
                         return (
@@ -53,7 +53,7 @@ const Results = props => {
                               className="col-sm-12 col-lg-4"
                               key={"index-" + index}
                             >
-                              <div className="card" style={{ width: "300px;" }}>
+                              <div className="card">
                                 <img
                                   className="rounded shadow-lg"
                                   style={{ maxWidth: "100%" }}
@@ -69,7 +69,7 @@ const Results = props => {
                                       color: "white"
                                     }}
                                   >
-                                    <h5>{result.price}</h5>
+                                    <h5>{result.price} €</h5>
                                   </div>
                                   <p
                                     className="card-text"
@@ -93,20 +93,6 @@ const Results = props => {
                   </div>
                 </div>
               </div>
-              <a
-                href="#inam"
-                className="carousel-control-prev"
-                data-slide="prev"
-              >
-                <span className="carousel-control-prev-icon"></span>
-              </a>
-              <a
-                href="#inam"
-                className="carousel-control-next"
-                data-slide="next"
-              >
-                <span className="carousel-control-next-icon"></span>
-              </a>
             </div>
           </div>
         </div>

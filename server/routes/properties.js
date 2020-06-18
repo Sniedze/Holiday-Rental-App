@@ -65,7 +65,7 @@ router.get("/properties/search", async (req, res) => {
 });
 
 router.get("/property/:id", async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const property = await Property.query()
       .findById(id)
