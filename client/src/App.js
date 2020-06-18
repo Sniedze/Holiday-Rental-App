@@ -24,29 +24,29 @@ function App() {
       <div className="App">
         <Header isAuth={isAuth} setIsAuth={setIsAuth} />
         <Switch>
-          <Route exact path="/" component={props => <Home />}></Route>
-          <Route path="/signup" component={props => <Signup />}></Route>
-          <Route path="/results" component={props => <Results />}></Route>
+          <Route exact path="/" component={(props) => <Home />}></Route>
+          <Route path="/signup" component={(props) => <Signup />}></Route>
+          <Route path="/results" component={(props) => <Results />}></Route>
           <Route
             path="/login"
-            component={props => <Login setIsAuth={setIsAuth} />}
+            component={(props) => <Login setIsAuth={setIsAuth} />}
           ></Route>
           <PrivateRoute
             path="/profile"
             isAuth={isAuth}
-            component={props => <Profile />}
+            component={(props) => <Profile />}
           ></PrivateRoute>
           <PrivateRoute
             exact
             path="/property"
             isAuth={isAuth}
-            component={props => <Property {...props} />}
+            component={(props) => <Property {...props} />}
           />
           <PrivateRoute
             exact
             path="/property/create"
             isAuth={isAuth}
-            component={props => <AddProperty />}
+            component={(props) => <AddProperty />}
           ></PrivateRoute>
         </Switch>
       </div>

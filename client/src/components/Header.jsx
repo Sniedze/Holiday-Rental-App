@@ -49,7 +49,7 @@ const Header = (props) => {
                   width: "500px",
                   height: "300px",
                   fontFamily: "Heiti SC",
-                  marginTop: "200px"
+                  marginTop: "200px",
                 }}
                 trigger={
                   <li className="nav-item">
@@ -59,7 +59,7 @@ const Header = (props) => {
                 position="bottom-right"
               >
                 <div>
-                  <Login />
+                  <Login setIsAuth={setIsAuth} />
                 </div>
               </Popup>
 
