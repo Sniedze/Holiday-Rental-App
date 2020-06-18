@@ -68,7 +68,8 @@ const Property = (props) => {
               Maximum number of guests: {data.guest_capacity}
             </p>
             <p style={{ color: "black", margin: "0" }}>
-              Address: {data.street}, {data.city}, {data.country}
+              Address: {data.street}, {data.city}, {data.postal_code},{" "}
+              {data.country}
             </p>
             <button type="button" className="btn btn-warning">
               Edit{" "}
