@@ -7,12 +7,10 @@ import { MdDelete } from "react-icons/md";
 const Property = props => {
   const history = useHistory();
   const [data, setData] = useState([]);
-  const setLocation = useState([]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
     getProperties(id);
   }, [history]);
 
@@ -26,10 +24,8 @@ const Property = props => {
         url: `http://localhost:9090/user/property/${id}`,
         withCredentials: true
       }).then(data => {
-        const allProperties = data.data.property[0];
-        setData(allProperties);
-        console.log(allProperties);
-        setLocation(data.locations);
+        const selectedProperty = data.data.property[0];
+        setData(selectedProperty);
       });
     } catch (error) {
       console.log(error);
