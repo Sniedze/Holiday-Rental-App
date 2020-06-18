@@ -147,13 +147,8 @@ const Profile = () => {
             <>
               <NavLink
                 to={{
-<<<<<<< HEAD
                   pathname: "/property",
                   search: `?id=${property.id}`,
-=======
-                  pathname: `/property/${property.id}`,
-                  state: { data: property },
->>>>>>> 2dc60076d719388015e416eada113393b88247f4
                 }}
               >
                 <div className="container-fluid">
